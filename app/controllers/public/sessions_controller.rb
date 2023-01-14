@@ -4,6 +4,11 @@ class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :user_state, only: [:create]
 
+  def guest_sign_in
+    user = User.guest
+    sign_in user # ゲストユーザーをログイン状態にする
+    redirect_to root_path, notice: 'guestuserでログインしました。'
+  end
   # GET /resource/sign_in
   # def new
   #   super
@@ -34,7 +39,7 @@ class Public::SessionsController < Devise::SessionsController
           redirect_to new_user_registration_path
         end
       # パスワードが一致していて退会ステータスがfalseの場合はそのまま処理を実行
-      
+
       else
         # パスワードが一致しないときはログイン画面に戻る
         flash[:danger] = 'パスワードが一致しません。恐れ入りますが、確認のためもう一度パスワードをご入力ください'

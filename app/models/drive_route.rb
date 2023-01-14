@@ -4,4 +4,7 @@ class DriveRoute < ApplicationRecord
   has_many :routes
   has_many :tag_relationships, dependent: :destroy
   belongs_to :user
+  
+  has_one_attached :image
+  
 end
