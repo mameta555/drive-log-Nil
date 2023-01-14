@@ -1,8 +1,20 @@
 <header>
-    <% if user_signed_in? && current_user.name == "guestuser" %>
-      <%= link_to "About", about_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    
+  <!--管理者でログイン中のとき-->
+    <% if admin_signed_in? %>
+      <li>
+        <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
+      </li>
+      
+  <!--ゲストユーザーでログイン中のとき（ログインしていて、名前がゲストユーザーのとき）-->
+    <% elsif user_signed_in? && current_user.name == "guestuser" %>
+      <li>
+        <%= link_to "About", about_path %>
+      </li>
+      <li>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </li>
+  
+  <!--ユーザーがログイン中のとき-->
     <% elsif user_signed_in? %>
       <li>
         <%= link_to "マイページ", user_path(current_user.id) %>
@@ -10,6 +22,8 @@
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
+      
+  <!--ログインしていないとき-->
     <% else %>
       <li>
         <%= link_to "About", about_path %>
