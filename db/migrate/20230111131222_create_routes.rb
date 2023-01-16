@@ -5,7 +5,7 @@ class CreateRoutes < ActiveRecord::Migration[6.1]
       t.integer :drive_route_id, null: false
       t.string :destination, null: false
       t.text :destination_memo
-      t.string :status, null: false
+      t.string :status, default: 0
       t.timestamps
     end
   end

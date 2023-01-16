@@ -1,2 +1,48 @@
-<h1>Public::DriveRoutes#show</h1>
-<p>Find me in app/views/public/drive_routes/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h2><%= @drive_route.title %></h2>
+      <p>投稿日：<%= @drive_route.created_at.strftime('%Y/%m/%d') %></p>
+      <% if @drive_route.user == current_user %>
+        <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？" %>
+        <%= link_to "編集する", edit_drive_route_path(@drive_route.id) %>
+      <% end %>
+      <table>
+        <tr>
+          <td>
+            <%= image_tag @drive_route.get_image(200,200) %>
+          </td>
+          <td>
+            *ルートの紹介*<br>
+            <%= @drive_route.body %>
+          </td>
+        </tr>
+        <!--<tr>-->
+        <!--  <th>-->
+        <!--    < @drive_route.tag.each do |tag| %>-->
+        <!--      <= tag.tag_name %>-->
+        <!--    < end %>-->
+        <!--  </th>-->
+        <!--</tr>-->
+      </table>
+    </div>
+
+    <div class="col-3 offset-md-1">
+      <table class="table">
+        <tr>
+          <th>
+            投稿者
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <%= link_to user_path(@drive_route.user.id) do %>
+              <%= image_tag @drive_route.user.get_profile_image(100,100) %><br>
+              <%= @drive_route.user.name %>
+            <% end %>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -9,3 +9,10 @@ Admin.create!(
    email: 'admin@drive-log.com',
    password: 'drive2023'
 )
+
+Tag.create!([
+    { tag_name: '春にオススメ' },
+    { tag_name: '夏にオススメ' },
+    { tag_name: '秋にオススメ'},
+    { tag_name: '冬にオススメ'},
+    ])

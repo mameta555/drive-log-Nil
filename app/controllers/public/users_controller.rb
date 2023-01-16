@@ -1,7 +1,5 @@
 class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :update]
-  def index
-  end
 
   def show
     @user = User.find(params[:id])
@@ -17,7 +15,17 @@ class Public::UsersController < ApplicationController
     user.update(user_params)
     redirect_to user_path(user.id)
   end
+  
+  def check
+    @user = current_user
+  end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = '退会しました'
+    redirect_to root_path
+  end
   private
 
   def user_params

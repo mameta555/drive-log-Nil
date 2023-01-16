@@ -1,0 +1,11 @@
+<h2>行き先の追加</h2>
+<% @drive_route.routes.each do |route| %>
+  <%= route.destination %>
+  <%= route.destination_memo %>
+<% end %>
+
+<%= form_with model: [@drive_route, @route] do |f| %>
+  <%= f.text_field :destination %>
+  <%= f.text_area :destination_memo %>
+  <%= f.submit "送信する" %>
+<% end %>

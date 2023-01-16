@@ -1,3 +1,4 @@
 class TagRelationship < ApplicationRecord
-  has_many :tag_relationships
+  belongs_to :drive_route
+  belongs_to :tag
 end

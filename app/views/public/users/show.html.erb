@@ -1,38 +1,41 @@
 <div>
   <%= flash[:notice] %>
 </div>
-<h2><%= @user.name %> さんのページ</h2>
+
 
 <!--ユーザーのプロフィール（ログインユーザーは編集ボタン表示）-->
-<table>
-  <tr>
-    <th>
-      <%= image_tag @user.get_profile_image(100,100) %><br>
-      <% if @user.name != "guestuser" && @user == current_user %>
-        <%= link_to "プロフィール編集", edit_user_path(@user) %>
-      <% end %>
-    </th>
-    <th>
-      <%= @user.name %><br>
-      <%= @user.introduction %>
-    </th>
-  </tr>
-</table>
-
+<div class="container">
+  <h2><%= @user.name %> さんのページ</h2><br>
+  <div class="row">
+    <table>
+      <tr>
+        <th>
+          <%= image_tag @user.get_profile_image(100,100) %><br>
+          <% if @user.name != "guestuser" && @user == current_user %>
+            <%= link_to "プロフィール編集", edit_user_path(@user) %>
+          <% end %>
+        </th>
+        <th>
+          <%= @user.name %><br>
+          <%= @user.introduction %>
+        </th>
+      </tr>
+    </table>
+  </div>
 <h2><%= @user.name %>さんのドライブルート一覧</h2>
-<!--ユーザーの投稿一覧-->
-<%= @drive_routes.each do |drive_route| %>
-  <table>
-    <tr>
-      <th>
-        <%= link_to drive_route_path(drive_route.id) do %>
-          <%= image_tag drive_route.get_image(100,80) %><br>
-          <%= drive_route.title %>
-        <% end %>
-      </th>
-      <th>
-        <%= drive_route.user.name %>
-      </th>
-    </tr>
-  </table>
-<% end %>
+  <div class="row">
+    <!--ユーザーの投稿一覧-->
+    <% @drive_routes.each do |drive_route| %>
+      <table>
+        <tr>
+          <th>
+            <%= link_to drive_route_path(drive_route.id) do %>
+              <%= image_tag drive_route.get_image(300,200) %><br>
+              <%= drive_route.title %>
+            <% end %>
+          </th>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+</div>

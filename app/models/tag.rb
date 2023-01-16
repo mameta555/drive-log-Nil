@@ -1,4 +1,6 @@
 class Tag < ApplicationRecord
-  belongs_to :tag
-  belongs_to :drive_route
+  has_many :tag_relationships, dependent: :destroy
+  has_many :drive_routes, through: :tag_relationships
+
+  validates :tag_name, uniqueness: true
 end
