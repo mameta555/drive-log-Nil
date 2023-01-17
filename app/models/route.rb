@@ -3,5 +3,13 @@ class Route < ApplicationRecord
   belongs_to :drive_route
   has_many :drive_reports, dependent: :destroy
   
-  has_one_attached :route_image
+  has_one_attached :destination_image
+  
+  def get_destination_image(width, height)
+    unless destination_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      destination_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    destination_image.variant(resize_to_limit: [width, height]).processed
+  end
 end

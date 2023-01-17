@@ -1,14 +1,14 @@
 class Public::DriveRoutesController < ApplicationController
   def new
     @drive_route = DriveRoute.new
-
+    @route = Route.new
   end
 
   def create
     @drive_route = DriveRoute.new(drive_route_params)
     @drive_route.user_id = current_user.id
     @drive_route.save
-    redirect_to drive_routes_path
+    redirect_to drive_route_routes_path(@drive_route.id)
   end
 
   def index
@@ -17,6 +17,7 @@ class Public::DriveRoutesController < ApplicationController
 
   def show
     @drive_route = DriveRoute.find(params[:id])
+    
   end
 
   def edit

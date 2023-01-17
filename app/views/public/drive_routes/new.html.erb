@@ -1,4 +1,5 @@
-<h1>ドライブルート新規投稿</h1>
+<h2>ドライブルート新規投稿</h2>
+
 <%= form_with model: @drive_route do |f| %>
   <h5>思い出の一枚</h5>
     <%= f.file_field :image, accept: "image/*" %>
@@ -13,6 +14,6 @@
         <%= tag.text %>
       <% end %>
     <% end %>
-    
+
   <%= f.submit '投稿' %>
 <% end %>

@@ -7,24 +7,54 @@
         <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？" %>
         <%= link_to "編集する", edit_drive_route_path(@drive_route.id) %>
       <% end %>
-      <table>
-        <tr>
-          <td>
-            <%= image_tag @drive_route.get_image(200,200) %>
-          </td>
-          <td>
-            *ルートの紹介*<br>
-            <%= @drive_route.body %>
-          </td>
-        </tr>
-        <!--<tr>-->
-        <!--  <th>-->
-        <!--    < @drive_route.tag.each do |tag| %>-->
-        <!--      <= tag.tag_name %>-->
-        <!--    < end %>-->
-        <!--  </th>-->
-        <!--</tr>-->
-      </table>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <table>
+              <tr>
+                <td>
+                  <%= image_tag @drive_route.get_image(200,200) %>
+                </td>
+                <td>
+                  *ルートの紹介*<br>
+                  <%= @drive_route.body %>
+                </td>
+              </tr>
+              <!--<tr>-->
+              <!--  <th>-->
+              <!--    < @drive_route.tag.each do |tag| %>-->
+              <!--      <= tag.tag_name %>-->
+              <!--    < end %>-->
+              <!--  </th>-->
+              <!--</tr>-->
+            </table>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col">
+            <h3>ドライブルート</h3>
+            <% if @drive_route.user == current_user %>
+              <%= link_to "行き先を編集", drive_route_routes_path(@drive_route.id) %>
+            <% end %>
+            <table class="table">
+
+            <% @drive_route.routes.each do |route| %>
+            <tr>
+              <td>
+                <%= image_tag route.get_destination_image(150,100) %>
+              </td>
+              <td>
+                <%= route.destination %>
+              </td>
+              <td>
+                <%= route.destination_memo %>
+              </td>
+            </tr>
+            <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-3 offset-md-1">
