@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
   <% @drive_routes.each do |drive_route| %>
-    <div class="col">
+    <div class="col-3 m-3">
       <table>
         <tr>
           <th>
@@ -17,6 +17,11 @@
             <%= image_tag drive_route.user.get_profile_image(30,30) %>
             <%= drive_route.user.name %>
           </th>
+        </tr>
+        <tr>
+          <td>
+            投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
+          </td>
         </tr>
       </table>
     </div>

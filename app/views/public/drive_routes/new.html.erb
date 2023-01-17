@@ -6,7 +6,7 @@
   <h5>タイトル</h5>
     <%= f.text_field :title %>
   <h5>ドライブルートの紹介</h5>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, rows: '5', cols: "50" %>
   <h5>タグ</h5>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
       <%= tag.label do %>
@@ -15,5 +15,5 @@
       <% end %>
     <% end %>
 
-  <%= f.submit '投稿' %>
+  <%= f.submit '保存' %>
 <% end %>

@@ -12,7 +12,7 @@ class Public::DriveRoutesController < ApplicationController
   end
 
   def index
-    @drive_routes = DriveRoute.all
+    @drive_routes = DriveRoute.all.order(created_at: :desc)
   end
 
   def show

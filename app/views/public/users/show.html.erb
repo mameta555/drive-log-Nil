@@ -26,16 +26,18 @@
   <div class="row">
     <!--ユーザーの投稿一覧-->
     <% @drive_routes.each do |drive_route| %>
-      <table>
-        <tr>
-          <th>
-            <%= link_to drive_route_path(drive_route.id) do %>
-              <%= image_tag drive_route.get_image(300,200) %><br>
-              <%= drive_route.title %>
-            <% end %>
-          </th>
-        </tr>
-      </table>
+      <div class="col mt-5">
+        <table>
+          <tr>
+            <th>
+              <%= link_to drive_route_path(drive_route.id) do %>
+                <%= image_tag drive_route.get_image(300,200) %><br>
+                <%= drive_route.title %>
+              <% end %>
+            </th>
+          </tr>
+        </table>
+      </div>
     <% end %>
   </div>
 </div>
