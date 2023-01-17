@@ -13,7 +13,8 @@ class Public::RoutesController < ApplicationController
   end
   
   def destroy
-    Route.find(params[:id]).destroy
+    @route = Route.find(params[:id])
+    @route.destroy
     drive_route = DriveRoute.find(params[:drive_route_id])
     redirect_to drive_route_routes_path(drive_route.id)
   end
