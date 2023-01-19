@@ -1,2 +1,26 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<h2>ユーザー一覧</h2>
+
+<table class="table">
+  <tr>
+    <th>ユーザーID</th>
+    <th>アイコン</th>
+    <th>名前</th>
+    <th>登録日</th>
+    <th>投稿数</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= image_tag user.get_profile_image(30,30) %></td>
+
+    <td>
+      <%= link_to admin_user_path(user.id) do %>
+        <%= user.name %>
+      <% end %>
+    </td>
+
+    <td><%= user.created_at.strftime('%Y/%m/%d') %></td>
+    <td><%= user.drive_routes.count %></td>
+  </tr>
+  <% end %>
+</table>

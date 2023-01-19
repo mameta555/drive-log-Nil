@@ -1,9 +1,9 @@
 class Public::UsersController < ApplicationController
-  before_action :ensure_guest_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:edit, :update, :destroy]
 
   def show
     @user = User.find(params[:id])
-    @drive_routes = @user.drive_routes
+    @drive_routes = @user.drive_routes.page(params[:page]).per(6).order(created_at: :desc)
   end
 
   def edit

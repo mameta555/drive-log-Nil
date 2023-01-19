@@ -1,4 +1,22 @@
 <h1>トップ画面です</h1>
-<div>
-  <%= flash[:notice] %>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="container">
+        <div class="row">
+          <%= flash[:notice] %>
+        </div>
+        <div class="row">
+          <div class="container">
+            <h2>新着投稿</h2>
+            <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
+            <%= link_to "すべての投稿を見る>", drive_routes_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 offset-1">
+      <h2>タグ</h2>
+    </div>
+  </div>
 </div>

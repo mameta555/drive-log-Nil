@@ -12,12 +12,12 @@ class Public::DriveRoutesController < ApplicationController
   end
 
   def index
-    @drive_routes = DriveRoute.all.order(created_at: :desc)
+    @drive_routes = DriveRoute.page(params[:page]).per(6).order(created_at: :desc)
   end
 
   def show
     @drive_route = DriveRoute.find(params[:id])
-    
+
   end
 
   def edit

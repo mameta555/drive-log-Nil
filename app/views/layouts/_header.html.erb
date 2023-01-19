@@ -11,6 +11,9 @@
       <!--管理者でログイン中のとき-->
         <% if admin_signed_in? %>
           <li class="nav-item">
+            <%= link_to "ユーザー一覧", admin_users_path %>
+          </li>
+          <li class="nav-item">
             <%= link_to "タグ一覧", admin_tags_path %>
           </li>
           <li class="nav-item">

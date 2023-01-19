@@ -1,30 +1,18 @@
 <h2>ドライブルート投稿一覧</h2>
 <div class="container">
   <div class="row">
-  <% @drive_routes.each do |drive_route| %>
-    <div class="col-3 m-3">
-      <table>
-        <tr>
-          <th>
-            <%= link_to drive_route_path(drive_route) do %>
-              <%= image_tag drive_route.get_image(300,200) %><br>
-              <%= drive_route.title %>
-            <% end %>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <%= image_tag drive_route.user.get_profile_image(30,30) %>
-            <%= drive_route.user.name %>
-          </th>
-        </tr>
-        <tr>
-          <td>
-            投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
-          </td>
-        </tr>
-      </table>
+    <div class="col-8">
+      <div class="container">
+        <!--投稿一覧のrender-->
+          <%= render 'list', drive_routes: @drive_routes %>
+
+          <div class="row">
+            <%= paginate @drive_routes %>
+          </div>
+      </div>
     </div>
-  <% end %>
+    <div class="col-3 offset-1">
+      <h2>タグ</h2>
+    </div>
   </div>
 </div>

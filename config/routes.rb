@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top'
     resources :drive_routes, only: [:index, :show, :destroy]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :update, :destroy]
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
   end
 
