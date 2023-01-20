@@ -4,8 +4,8 @@
       <h2><%= @drive_route.title %></h2>
       <p>投稿日：<%= @drive_route.created_at.strftime('%Y/%m/%d') %></p>
       <% if @drive_route.user == current_user %>
-        <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？" %>
-        <%= link_to "編集する", edit_drive_route_path(@drive_route.id) %>
+        <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？", class: "btn btn-danger" %>
+        <%= link_to "編集する", edit_drive_route_path(@drive_route.id), class: "btn btn-success" %>
       <% end %>
       <div class="container">
         <div class="row">
