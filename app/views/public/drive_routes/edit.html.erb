@@ -7,11 +7,12 @@
   <%= f.text_field :title %>
 
   <h5>ドライブルートの紹介</h5>
-  <%= f.text_area :body %>
+  <%= f.text_area :body, rows: '5', cols: "50" %>
 
   <h5>タグ</h5>
   <!--@drive_route.tag_idsでチェックしたタグを取得し、.map(&:to_param)で選択していたタグのチェックをつける-->
   <!--{checked：}と.map(&:to_param)は固定-->
+  <!--DriveRouteで保存するのはタグのid(tag_ids)なのでupdateアクションはいつも通り-->
   <div class='form-group'>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name, {checked: @drive_route.tag_ids.map(&:to_param) }) do |tag| %>
     <div class='form-check'>

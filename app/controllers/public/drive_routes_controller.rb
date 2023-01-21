@@ -20,17 +20,12 @@ class Public::DriveRoutesController < ApplicationController
     else
        @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
     end
-    # if params[:tag_ids]
-    #   @drive_routes = []
-    #   params[:tag_ids].each do |key, value|
-    #     @drive_routes += DriveRoute.find_by(tag_name: key).drive_routes if value == "1"
-    #   end
-    #   @drive_routes.uniq!
-    # end
+   
   end
 
   def show
     @drive_route = DriveRoute.find(params[:id])
+    @drive_comment = DriveComment.new
   end
 
   def edit
