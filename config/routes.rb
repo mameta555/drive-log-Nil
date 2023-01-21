@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :drive_routes do
       resources :routes, only: [:index, :create, :destroy]
       resources :drive_comments, only: [:create, :destroy]
+      resource :likes, only: [:create, :destroy]
     end
     get '/users/check' => 'users#check'
     resources :users, only: [:index, :edit, :update, :show, :destroy]

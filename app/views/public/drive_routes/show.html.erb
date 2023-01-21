@@ -13,6 +13,19 @@
         <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？", class: "btn btn-danger" %>
         <%= link_to "編集する", edit_drive_route_path(@drive_route.id), class: "btn btn-success" %>
       <% end %>
+      <% if @drive_route.liked_by?(current_user) %>
+        <p>
+          <%= link_to drive_route_likes_path(@drive_route), method: :delete do %>
+            ♥<%= @drive_route.likes.count %>いいね
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to drive_route_likes_path(@drive_route), method: :post do %>
+            ♡<%= @drive_route.likes.count %>いいね
+          <% end %>
+        </p>
+      <% end %>
       <div class="container">
         <div class="row">
           <div class="col">
