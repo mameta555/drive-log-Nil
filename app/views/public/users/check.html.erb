@@ -1,4 +1,4 @@
 <h2>退会してもよろしいでしょうか？</h2>
-<p>退会するとアカウントが削除され、これまでの投稿やドライブの記録、コメントは削除されます</p>
-<%= link_to "退会しない", edit_user_path(@user.id) %>
-<%= link_to "退会する", user_path(@user), method: :delete, "data-confirm" => "本当に退会しますか？" %>
+<p>退会するとアカウントが削除され、これまでの投稿やドライブの記録、コメントはすべて削除されます</p>
+<p><%= link_to "退会しない", edit_user_path(@user.id), class: "btn btn-success" %></p>
+<p><%= link_to "退会する", user_path(@user), method: :delete, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger" %></p>

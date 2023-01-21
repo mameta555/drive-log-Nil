@@ -9,13 +9,19 @@
   <h5>ドライブルートの紹介</h5>
   <%= f.text_area :body %>
 
-  <!--<h5>タグ</h5>-->
-  <!--<= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>-->
-  <!--  <= tag.label do %>-->
-  <!--    <= tag.check_box %>-->
-  <!--    <= tag.text %>-->
-  <!--  < end %>-->
-  <!--< end %>-->
+  <h5>タグ</h5>
+  <!--@drive_route.tag_idsでチェックしたタグを取得し、.map(&:to_param)で選択していたタグのチェックをつける-->
+  <!--{checked：}と.map(&:to_param)は固定-->
+  <div class='form-group'>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name, {checked: @drive_route.tag_ids.map(&:to_param) }) do |tag| %>
+    <div class='form-check'>
+      <%= tag.label class: 'form-check-label' do %>
+        <%= tag.check_box class: 'form-check-input' %>
+        <%= tag.text %>
+       <% end %>
+    </div>
+    <% end %>
+  </div>
 
   <%= f.submit "変更を保存" %>
 
