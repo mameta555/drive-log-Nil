@@ -9,14 +9,31 @@
         <div class="row">
           <div class="container">
             <h2>新着投稿</h2>
-            <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
-            <%= link_to "すべての投稿を見る>", drive_routes_path %>
+            <div class="row">
+              <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
+            </div>
+            <div class="row">
+              <%= link_to "すべての投稿を見る>", drive_routes_path %>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-3 offset-1">
       <h2>タグ</h2>
+      <ul class="list-group-flush">
+        <% @tags.each do |tag| %>
+        <li class="list-group-item">
+          <!--drive_route（投稿記事）のtag_idにタグのidを代入する-->
+          <%= link_to drive_routes_path(tag_id: tag.id) do %>
+            <%= tag.tag_name %>(<%= tag.drive_routes.count %>)
+          <% end %>
+        </li>
+        <% end %>
+        <li class="list-group-item">
+          <%= link_to "すべての記事を表示>", drive_routes_path %>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

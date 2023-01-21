@@ -12,12 +12,25 @@ class Public::DriveRoutesController < ApplicationController
   end
 
   def index
-    @drive_routes = DriveRoute.page(params[:page]).per(6).order(created_at: :desc)
+    # @drive_routes = params[:tag_id].present? ? Tag.find(params[:tag_id]).drive_routes : DriveRoute.page(params[:page]).per(6).order(created_at: :desc)
+    @tags = Tag.all
+    if params[:tag_id]
+      @tag = Tag.find(params[:tag_id])
+      @drive_routes = @tag.drive_routes.page(params[:page]).per(9).order(created_at: :desc)
+    else
+       @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
+    end
+    # if params[:tag_ids]
+    #   @drive_routes = []
+    #   params[:tag_ids].each do |key, value|
+    #     @drive_routes += DriveRoute.find_by(tag_name: key).drive_routes if value == "1"
+    #   end
+    #   @drive_routes.uniq!
+    # end
   end
 
   def show
     @drive_route = DriveRoute.find(params[:id])
-
   end
 
   def edit
@@ -36,9 +49,15 @@ class Public::DriveRoutesController < ApplicationController
     redirect_to drive_routes_path
   end
 
-  private
+  # def search_tag
+  #   @tag_list = Tag.all
+  #   @tag = Tag.find(params[:tag_id])
+  #   @drive_routes = @tag.drive_routes.page(params[:page]).per(6)
+  # end
 
+  private
+# 投稿一つにつきタグは複数なのでtag_idsと複数形
   def drive_route_params
-    params.require(:drive_route).permit(:title, :image, :body, tag_name_ids: [])
+    params.require(:drive_route).permit(:title, :image, :body, tag_ids: [])
   end
 end

@@ -1,27 +1,20 @@
-<div class="row">
-  <% drive_routes.each do |drive_route| %>
-    <div class="col-3 m-3">
-      <table>
-        <tr>
-          <th>
-            <%= link_to drive_route_path(drive_route) do %>
-              <%= image_tag drive_route.get_image(300,200) %><br>
-              <%= drive_route.title %>
-            <% end %>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <%= image_tag drive_route.user.get_profile_image(30,30) %>
-            <%= drive_route.user.name %>
-          </th>
-        </tr>
-        <tr>
-          <td>
-            投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
-          </td>
-        </tr>
-      </table>
+<% drive_routes.each do |drive_route| %>
+<div class="col-sm-4 card-deck">
+  <div class="card border-info m-2 mh-40">
+    <%= image_tag drive_route.get_image(300,200), class: "card-img-top" %>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to drive_route_path(drive_route) do %>
+          <%= drive_route.title %>
+        <% end %>
+      </h5>
+      <p class="card-text">
+        投稿者：<%= image_tag drive_route.user.get_profile_image(20,20), class: "rounded-circle" %><%= drive_route.user.name %>
+      </p>
+      <p class="card-text">
+        投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
+      </p>
     </div>
-  <% end %>
+  </div>
 </div>
+<% end %>

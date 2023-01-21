@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     end
     get '/users/check' => 'users#check'
     resources :users, only: [:index, :edit, :update, :show, :destroy]
+    get "search_tag" => "drive_routes#search_tag"
 
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

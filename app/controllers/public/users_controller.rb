@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @drive_routes = @user.drive_routes.page(params[:page]).per(6).order(created_at: :desc)
+    @drive_routes = @user.drive_routes.page(params[:page]).per(8).order(created_at: :desc)
   end
 
   def edit

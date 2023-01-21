@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2023_01_13_094344) do
 
   create_table "tag_relationships", force: :cascade do |t|
     t.integer "drive_route_id", null: false
-    t.integer "tag_name_id"
+    t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

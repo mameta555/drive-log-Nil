@@ -4,9 +4,9 @@
     <table>
       <tr>
         <th>
-          <%= image_tag user.get_profile_image(100,100) %><br>
+          <%= image_tag user.get_profile_image(100,100), class: "rounded-circle" %><br>
           <% if user.name != "guestuser" && user == current_user %>
-            <%= link_to "プロフィール編集", edit_user_path(user) %>
+            <%= link_to "プロフィール編集", edit_user_path(user), class: "btn btn-success"%>
           <% end %>
         </th>
         <th>
@@ -21,24 +21,19 @@
     <!--ユーザーの投稿一覧-->
     <% drive_routes.each do |drive_route| %>
       <div class="col-3 m-3">
-        <table>
-          <tr>
-            <th>
+        <div class="card border-info m-2">
+          <%= image_tag drive_route.get_image(300,200), class: "card-img-top" %>
+          <div class="card-body">
+            <h5 class="card-body">
               <%= link_to drive_route_path(drive_route.id) do %>
-                <%= image_tag drive_route.get_image(300,250) %><br>
-                <%= drive_route.title %>
+                  <%= drive_route.title %>
               <% end %>
-            </th>
-          </tr>
-          <tr>
-            <td>
+            </h5>
+            <p class="card-text">
               投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
-            </td>
-          </tr>
-        </table>
+            </p>
+          </div>
+        </div>
       </div>
     <% end %>
-  </div>
-  <%= paginate drive_routes %>
-
-</div>
+    <%= paginate drive_routes %>
