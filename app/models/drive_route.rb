@@ -17,7 +17,7 @@ class DriveRoute < ApplicationRecord
   end
 
   def liked_by?(user)
-    # モデル名.where(任意のカラム名: 格納されている値)
+    # モデル名.exists?(任意のカラム名: 格納されている値)
     likes.exists?(user_id: user.id)
   end
 end

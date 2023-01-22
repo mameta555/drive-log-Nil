@@ -1,0 +1,25 @@
+<% drive_routes.each do |drive_route| %>
+<div class="col-sm-4 card-deck">
+  <div class="card border-info m-2 mh-40">
+      <%= image_tag drive_route.get_image(50,100), class: "card-img-top" %>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to admin_drive_route_path(drive_route) do %>
+          <%= drive_route.title %>
+        <% end %>
+      </h5>
+      <p class="card-text">
+        投稿者：<%= image_tag drive_route.user.get_profile_image(20,20), class: "rounded-circle" %><%= drive_route.user.name %>
+      </p>
+      <p class="card-text">
+        投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
+      </p>
+      <p>♥<%= drive_route.likes.count %></p>
+      <p class="card-text">
+        <%= drive_route.drive_comments.count %>コメント
+      </p>
+      
+    </div>
+  </div>
+</div>
+<% end %>

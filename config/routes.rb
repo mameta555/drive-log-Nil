@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     get 'homes/top'
     resources :drive_routes, only: [:index, :show, :destroy]
     resources :users, only: [:index, :show, :update, :destroy]
-    resources :tags, only: [:index, :create, :edit, :update, :destroy]
+    resources :tags, only: [:index, :create, :edit, :update, :destroy] do
+      resources :drive_comments, only: [:destroy]
+    end
   end
 
   scope module: :public do
@@ -36,8 +38,11 @@ Rails.application.routes.draw do
       resource :likes, only: [:create, :destroy]
     end
     get '/users/check' => 'users#check'
-    resources :users, only: [:index, :edit, :update, :show, :destroy]
-    get "search_tag" => "drive_routes#search_tag"
+    resources :users, only: [:index, :edit, :update, :show, :destroy] do
+      member do
+        get :likes
+      end
+    end
 
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

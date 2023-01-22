@@ -67,7 +67,7 @@
             </table>
             <h3>コメント</h3>
             <div>
-              <p>コメント数件数：<%= @drive_route.drive_comments.count %></p>
+              <p>コメント件数：<%= @drive_route.drive_comments.count %></p>
               <% @drive_route.drive_comments.each do |drive_comment| %>
                 <p>
                   <%= link_to user_path(drive_comment.user.id) do %>

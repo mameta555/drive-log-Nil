@@ -1,6 +1,12 @@
 class Admin::DriveRoutesController < ApplicationController
   def index
-    @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
+    @tags = Tag.all
+    if params[:tag_id]
+      @tag = Tag.find(params[:tag_id])
+      @drive_routes = @tag.drive_routes.page(params[:page]).per(9).order(created_at: :desc)
+    else
+       @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
+    end
   end
 
   def show

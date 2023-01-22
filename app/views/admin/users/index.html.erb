@@ -11,7 +11,7 @@
   <% @users.each do |user| %>
   <tr>
     <td><%= user.id %></td>
-    <td><%= image_tag user.get_profile_image(30,30) %></td>
+    <td><%= image_tag user.get_profile_image(30,30), class: "rounded-circle" %></td>
 
     <td>
       <%= link_to admin_user_path(user.id) do %>

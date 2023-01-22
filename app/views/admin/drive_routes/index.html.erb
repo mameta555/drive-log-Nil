@@ -1,31 +1,32 @@
 <h1>投稿記事一覧</h1>
 <div class="container">
   <div class="row">
-
-    <% @drive_routes.each do |drive_route| %>
-    <div class="col col-3">
-      <table>
-        <tr>
-          <th>
-            <%= link_to admin_drive_route_path(drive_route.id) do %>
-              <%= image_tag drive_route.get_image(300,200) %><br>
-              <%= drive_route.title %>
-            <% end %>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <%= drive_route.user.name %>
-          </th>
-        </tr>
-        <tr>
-          <td>
-            投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
-          </td>
-        </tr>
-      </table>
+    <div class="col-8">
+      <div class="container">
+        <!--投稿一覧のrender-->
+        <div class="row">
+          <%= render 'list', drive_routes: @drive_routes %>
+        </div>
+          <div class="row">
+            <%= paginate @drive_routes %>
+          </div>
+      </div>
     </div>
-    <% end %>
-    <%= paginate @drive_routes %>
+    <div class="col-3 offset-1">
+      <h2>タグ</h2>
+      <ul class="list-group-flush">
+        <% @tags.each do |tag| %>
+        <li class="list-group-item">
+          <!--drive_route（投稿記事）のtag_idにタグのidを代入する-->
+          <%= link_to drive_routes_path(tag_id: tag.id) do %>
+            <%= tag.tag_name %>(<%= tag.drive_routes.count %>)
+          <% end %>
+        </li>
+        <% end %>
+        <li class="list-group-item">
+          <%= link_to "すべての記事を表示>", drive_routes_path %>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
