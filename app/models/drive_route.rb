@@ -20,4 +20,8 @@ class DriveRoute < ApplicationRecord
     # モデル名.exists?(任意のカラム名: 格納されている値)
     likes.exists?(user_id: user.id)
   end
+
+  def self.search(keyword)
+    where(["title like? OR body like?", "%#{keyword}%", "%#{keyword}%"])
+  end
 end

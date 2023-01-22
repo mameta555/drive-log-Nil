@@ -20,7 +20,7 @@ class Public::DriveRoutesController < ApplicationController
     else
        @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
     end
-   
+
   end
 
   def show
@@ -44,11 +44,12 @@ class Public::DriveRoutesController < ApplicationController
     redirect_to drive_routes_path
   end
 
-  # def search_tag
-  #   @tag_list = Tag.all
-  #   @tag = Tag.find(params[:tag_id])
-  #   @drive_routes = @tag.drive_routes.page(params[:page]).per(6)
-  # end
+  def search
+    @tags = Tag.all
+    @keyword = params[:keyword]
+    @drive_routes = DriveRoute.search(params[:keyword]).page(params[:page]).per(9)
+    render "index"
+  end
 
   private
 # 投稿一つにつきタグは複数なのでtag_idsと複数形

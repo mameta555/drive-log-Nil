@@ -18,4 +18,11 @@ class Admin::DriveRoutesController < ApplicationController
     @drive_route.destroy
     redirect_to admin_drive_routes_path
   end
+
+  def search
+    @tags = Tag.all
+    @keyword = params[:keyword]
+    @drive_routes = DriveRoute.search(params[:keyword]).page(params[:page]).per(9)
+    render "index"
+  end
 end

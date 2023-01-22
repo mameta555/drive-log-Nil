@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top'
     resources :drive_routes, only: [:index, :show, :destroy]
+    get "search" => "drive_routes#search"
     resources :users, only: [:index, :show, :update, :destroy]
     resources :tags, only: [:index, :create, :edit, :update, :destroy] do
       resources :drive_comments, only: [:destroy]
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     resources :likes, only: [:index]
     resources :drive_reports, only: [:new, :create, :edit, :update, :index, :show]
+    get "search" => "drive_routes#search"
     resources :drive_routes do
       resources :routes, only: [:index, :create, :destroy]
       resources :drive_comments, only: [:create, :destroy]
@@ -43,7 +45,7 @@ Rails.application.routes.draw do
         get :likes
       end
     end
-
+    
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

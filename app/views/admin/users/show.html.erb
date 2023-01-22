@@ -5,9 +5,9 @@
     <table>
       <tr>
         <th>
-          <%= image_tag @user.get_profile_image(100,100) %><br>
+          <%= image_tag @user.get_profile_image(100,100) , class: "rounded-circle"%><br>
           <% if @user.name != "guestuser" %>
-            <%= link_to "ユーザーを削除", admin_user_path(@user.id), method: :delete, "data-confirm" => "このユーザーを削除しますか？", class: "btn btn-danger" %>
+            <p class="mt-2"><%= link_to "ユーザーを削除", admin_user_path(@user.id), method: :delete, "data-confirm" => "このユーザーを削除しますか？", class: "btn btn-danger" %></p>
           <% end %>
         </th>
         <th>
@@ -20,25 +20,7 @@
 <h2><%= @user.name %>さんのドライブルート一覧</h2>
   <div class="row">
     <!--ユーザーの投稿一覧-->
-    <% @drive_routes.each do |drive_route| %>
-      <div class="col-3 m-3">
-        <table>
-          <tr>
-            <th>
-              <%= link_to admin_drive_route_path(drive_route.id) do %>
-                <%= image_tag drive_route.get_image(300,250) %><br>
-                <%= drive_route.title %>
-              <% end %>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              投稿日：<%= drive_route.created_at.strftime('%Y/%m/%d') %>
-            </td>
-          </tr>
-        </table>
-      </div>
-    <% end %>
+    <%= render 'admin/drive_routes/list', drive_routes: @drive_routes %>
   </div>
   <%= paginate @drive_routes %>
 
