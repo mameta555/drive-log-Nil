@@ -1,4 +1,12 @@
 <h2>ドライブルート新規投稿</h2>
+<% if @drive_route.errors.any? %>
+  <%= @drive_route.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @drive_route.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with model: @drive_route do |f| %>
   <h5>思い出の一枚</h5>

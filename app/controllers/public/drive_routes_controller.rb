@@ -1,4 +1,7 @@
 class Public::DriveRoutesController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :search, :index]
+  before_action :ensure_correct_user, only: [:edit, :update]
+  
   def new
     @drive_route = DriveRoute.new
     @route = Route.new
@@ -7,8 +10,11 @@ class Public::DriveRoutesController < ApplicationController
   def create
     @drive_route = DriveRoute.new(drive_route_params)
     @drive_route.user_id = current_user.id
-    @drive_route.save
-    redirect_to drive_route_routes_path(@drive_route.id)
+    if @drive_route.save
+      redirect_to drive_route_routes_path(@drive_route.id)
+    else
+      render :new
+    end
   end
 
   def index
@@ -18,7 +24,7 @@ class Public::DriveRoutesController < ApplicationController
       @tag = Tag.find(params[:tag_id])
       @drive_routes = @tag.drive_routes.page(params[:page]).per(9).order(created_at: :desc)
     else
-       @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
+      @drive_routes = DriveRoute.page(params[:page]).per(9).order(created_at: :desc)
     end
 
   end
@@ -34,8 +40,11 @@ class Public::DriveRoutesController < ApplicationController
 
   def update
     drive_route = DriveRoute.find(params[:id])
-    drive_route.update(drive_route_params)
-    redirect_to drive_route_path(drive_route.id)
+    if drive_route.update(drive_route_params)
+      redirect_to drive_route_path(drive_route.id)
+    else
+      render edit
+    end
   end
 
   def destroy
@@ -55,5 +64,12 @@ class Public::DriveRoutesController < ApplicationController
 # 投稿一つにつきタグは複数なのでtag_idsと複数形
   def drive_route_params
     params.require(:drive_route).permit(:title, :image, :body, tag_ids: [])
+  end
+  
+  def ensure_correct_user
+    @drive_route = DriveRoute.find(params[:id])
+    unless @drive_route.user == current_user
+      redirect_to drive_route_path(@drive_route)
+    end
   end
 end

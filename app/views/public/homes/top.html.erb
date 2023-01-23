@@ -1,19 +1,27 @@
-<%= image_tag "sunset.jpg", width: '100%', height: '50%' %>
-<div class="container mt-5">
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="card text-white">
+  <%= image_tag "sunset.jpg", width: '100%', class: "card-img" %>
+  <div class="card-img-overlay">
+    <h1 class="card-title">Drivelog-Nilへようこそ</h1>
+    <p class="card-text h3">目標のない運転練習に目的地を。</p>
+    <p class="card-text h3">みんなで作る初心者ドライバーのための投稿サイト</p>
+  </div>
+</div>
+<div class="container mt-3">
   <div class="row">
     <div class="col-8">
       <div class="container">
-        <div class="row">
-          <%= flash[:notice] %>
-        </div>
-        
+
+
         <div class="row">
           <div class="container">
             <h2>新着投稿</h2>
             <div class="row">
               <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
             </div>
-            <div class="row">
+            <div class="row m-3">
               <%= link_to "すべての投稿を見る>", drive_routes_path %>
             </div>
           </div>

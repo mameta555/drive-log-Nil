@@ -1,6 +1,5 @@
 class Public::LikesController < ApplicationController
-  def index
-  end
+  before_action :authenticate_user!
   
   def create
     drive_route = DriveRoute.find(params[:drive_route_id])

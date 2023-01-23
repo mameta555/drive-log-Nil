@@ -8,7 +8,9 @@
           <%= render 'list', drive_routes: @drive_routes %>
         </div>
           <div class="row">
-            <%= paginate @drive_routes %>
+            <div class="col m-3">
+              <%= paginate @drive_routes %>
+            </div>
           </div>
       </div>
     </div>

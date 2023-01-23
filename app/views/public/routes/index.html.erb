@@ -1,31 +1,50 @@
-<h2>行き先の追加</h2>
-<table>
-<% @drive_route.routes.each do |route| %>
-<tr>
-  <td>
-    <%= image_tag route.get_destination_image(150,100) %>
-  </td>
-  <td>
-    <%= route.destination %>
-  </td>
-  <td>
-    <%= route.destination_memo %>
-  </td>
-  <td>
-    <%= link_to "削除", drive_route_route_path(route.drive_route, route), method: :delete %>
-  </td>
-</tr>
-<% end %>
-</table>
-
-<%= form_with model: [@drive_route, @route] do |f| %>
-  <h5>行き先の画像</h5>
-  <%= f.file_field :destination_image, accept: "image/*" %>
-  <h5>行き先</h5>
-  <%= f.text_field :destination, rows: '5', placeholder: "行き先をこちらに" %>
-  <h5>行き先情報</h5>
-  <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに" %>
-  <%= f.submit "追加する" %>
-<% end %>
-
-<%= link_to "投稿を完了する", drive_route_path(@drive_route) %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>行き先の追加</h2>
+      <% if @route.errors.any? %>
+        <%= @route.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @route.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      
+      <table class="table">
+      <% @drive_route.routes.each do |route| %>
+      <tr>
+        <td>
+          <%= image_tag route.get_destination_image(150,100) %>
+        </td>
+        <td>
+          <%= route.destination %>
+        </td>
+        <td>
+          <%= route.destination_memo %>
+        </td>
+        <td>
+          <%= link_to "削除", drive_route_route_path(route.drive_route, route), method: :delete, class: "btn btn-danger" %>
+        </td>
+      </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <%= form_with model: [@drive_route, @route] do |f| %>
+        <h5>行き先の画像</h5>
+        <%= f.file_field :destination_image, accept: "image/*" %>
+        <h5>行き先</h5>
+        <%= f.text_field :destination, rows: '5', placeholder: "行き先をこちらに" %>
+        <h5>行き先情報</h5>
+        <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに" %>
+        <%= f.submit "追加する" %>
+      <% end %>
+      
+      <p><%= link_to "投稿を完了する", drive_route_path(@drive_route), class: "btn btn-primary" %></p>
+    </div>
+  </div>
+</div>

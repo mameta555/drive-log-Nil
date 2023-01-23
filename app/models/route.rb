@@ -1,9 +1,12 @@
 class Route < ApplicationRecord
   belongs_to :user
   belongs_to :drive_route
-  has_many :drive_reports, dependent: :destroy
+  belongs_to :drive_report, optional: true
   
   has_one_attached :destination_image
+  
+  validates :destination, presence: true
+  validates :status, presence: true
   
   def get_destination_image(width, height)
     unless destination_image.attached?

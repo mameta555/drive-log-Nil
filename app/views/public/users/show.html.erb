@@ -2,29 +2,40 @@
   <%= flash[:notice] %>
 </div>
 <!--ユーザーのプロフィール（ログインユーザーは編集ボタン表示）-->
-<div class="container">
+<div class="container mx-auto">
   <h2><%= @user.name %> さんのページ</h2>
   <div class="row m-3">
-    <table>
-      <tr>
-        <th>
-          <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %><br>
-          <% if @user.name != "guestuser" && @user == current_user %>
-            <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-success"%>
-          <% end %>
-        </th>
-        <th>
-          <%=link_to"お気に入り記事",likes_user_path(@user) %>
-        </th>
-        <th>
-          <%= @user.name %><br>
-          <%= @user.introduction %>
-        </th>
-      </tr>
-    </table>
+    <div class="col-6">
+      <table class='table table-borderless'>
+        <tr>
+          <th rowspan="2">
+            <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %><br>
+          </th>
+          <th>
+            <%= @user.name %>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <%= @user.introduction %>
+          </th>
+        </tr>
+      </table>
+    </div>
   </div>
+  <div class="row m-5">
+    <div class="col">
+      <% if @user.name != "guestuser" && @user == current_user %>
+        <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-success"%>
+      <% end %>
+      <%=link_to likes_user_path(@user), class: "btn btn-primary" do %>
+        <i class="fa-solid fa-heart"></i>お気に入り一覧
+      <% end %>
+    </div>
+  </div>
+
   <h2><%= @user.name %>さんのドライブルート一覧</h2>
-  <div class="row">
+  <div class="row mt-3">
     <!--ユーザーの投稿一覧-->
     <% @drive_routes.each do |drive_route| %>
       <div class="col-sm-3 card-deck">
@@ -43,13 +54,13 @@
               <%= link_to "#{drive_route.drive_comments.count}コメント", drive_route_path(drive_route) %>
             </p>
             <% if drive_route.liked_by?(current_user) %>
-            <p>
+            <p class="card-text">
               <%= link_to drive_route_likes_path(drive_route), method: :delete do %>
                 ♥<%= drive_route.likes.count %>いいね
               <% end %>
             </p>
             <% else %>
-            <p>
+            <p class="card-text">
               <%= link_to drive_route_likes_path(drive_route), method: :post do %>
                 ♡<%= drive_route.likes.count %>いいね
               <% end %>
@@ -60,5 +71,9 @@
       </div>
     <% end %>
   </div>
-    <%= paginate @drive_routes %>
+  <div class="row">
+    <div class="col m-3">
+      <%= paginate @drive_routes %>
+    </div>
+  </div>
 </div>

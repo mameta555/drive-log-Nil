@@ -1,4 +1,5 @@
 class Public::DriveCommentsController < ApplicationController
+  before_action :authenticate_user!
   def create
     drive_route = DriveRoute.find(params[:drive_route_id])
     comment = current_user.drive_comments.new(drive_comment_params)

@@ -1,7 +1,7 @@
 <% drive_routes.each do |drive_route| %>
 <div class="col-sm-4 card-deck">
   <div class="card border-info m-2 mh-40">
-      <%= image_tag drive_route.get_image(50,100), class: "card-img-top" %>
+      <%= image_tag drive_route.get_image(300,200), class: "card-img-top" %>
     <div class="card-body">
       <h5 class="card-title">
         <%= link_to drive_route_path(drive_route) do %>
