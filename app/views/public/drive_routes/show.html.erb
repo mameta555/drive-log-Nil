@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mx-auto m-5">
   <div class="row">
     <div class="col-8">
       <h2><%= @drive_route.title %></h2>
@@ -9,11 +9,12 @@
           <%= link_to tag.tag_name, drive_routes_path(tag_id: tag.id), class: "btn btn-outline-dark" %>
         <% end %>
       </p>
-      <% if @drive_route.user == current_user %>
-        <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？", class: "btn btn-danger" %>
-        <%= link_to "編集する", edit_drive_route_path(@drive_route.id), class: "btn btn-success" %>
-      <% end %>
-      <% if user_signed_in? && current_user.is_guest? == false %>
+      
+      <% if user_signed_in? %>
+        <% if @drive_route.user == current_user %>
+          <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？", class: "btn btn-danger" %>
+          <%= link_to "編集する", edit_drive_route_path(@drive_route.id), class: "btn btn-success" %>
+        <% end %>
         <% if @drive_route.liked_by?(current_user) %>
           <p>
             <%= link_to drive_route_likes_path(@drive_route), method: :delete do %>

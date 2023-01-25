@@ -1,7 +1,7 @@
-<header>
-  <nav class="navbar navbar-expand-lg">
+<header class="shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #2792c3;">
     <div class="container">
-      <a class="navbar-brand p-3" href="/"><i class="fa-solid fa-car-side"></i>Drivelog-Nil</a>
+      <a class="navbar-brand p-3 h1" href="/"><i class="fa-solid fa-car-side"></i>Drivelog-Nil</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,70 +11,70 @@
       <!--管理者でログイン中のとき-->
         <% if admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to "投稿一覧", admin_drive_routes_path %>
+            <%= link_to "投稿一覧", admin_drive_routes_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "ユーザー一覧", admin_users_path %>
+            <%= link_to "ユーザー一覧", admin_users_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "タグ一覧", admin_tags_path %>
+            <%= link_to "タグ一覧", admin_tags_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
+            <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-light' %>
           </li>
 
       <!--ゲストユーザーでログイン中のとき（ログインしていて、名前がゲストユーザーのとき）-->
         <% elsif user_signed_in? && current_user.name == "guestuser" %>
           <li class="nav-item">
-            <%= link_to "ドライブ計画", drive_reports_path %>
+            <%= link_to "ドライブ計画", drive_reports_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "投稿する", new_drive_route_path %>
+            <%= link_to "投稿する", new_drive_route_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "About", about_path %>
+            <%= link_to "About", about_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "投稿一覧", drive_routes_path %>
+            <%= link_to "投稿一覧", drive_routes_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
           </li>
 
       <!--ユーザーがログイン中のとき-->
         <% elsif user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "ドライブ計画", new_drive_report_path %>
+            <%= link_to "ドライブ計画", drive_reports_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "投稿する", new_drive_route_path %>
+            <%= link_to "投稿する", new_drive_route_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "投稿一覧", drive_routes_path %>
+            <%= link_to "投稿一覧", drive_routes_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "マイページ", user_path(current_user.id) %>
+            <%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
           </li>
 
       <!--ログインしていないとき-->
         <% else %>
           <li class="nav-item">
-            <%= link_to "About", about_path %>
+            <%= link_to "About", about_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "投稿一覧", drive_routes_path %>
+            <%= link_to "投稿一覧", drive_routes_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %>
+            <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "新規登録", new_user_registration_path %>
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>
           </li>
           <li class="nav-item">
-            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light' %>
           </li>
         <% end %>
         </ul>
