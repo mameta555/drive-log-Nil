@@ -1,6 +1,6 @@
 class Public::RoutesController < ApplicationController
   before_action :authenticate_user!
-  # before_action :ensure_correct_user
+  
 
   def create
     @drive_route = DriveRoute.find(params[:drive_route_id])
@@ -15,6 +15,9 @@ class Public::RoutesController < ApplicationController
 
   def index
     @drive_route = DriveRoute.find(params[:drive_route_id])
+    unless @drive_route.user_id == current_user.id
+      redirect_to drive_route_path(@drive_route.id)
+    end
     @route = Route.new
   end
 
@@ -29,8 +32,10 @@ class Public::RoutesController < ApplicationController
   end
 
   def new
-    #byebug
     @drive_report = DriveReport.find(params[:drive_report_id])
+    unless @drive_report.user.id == current_user.id
+      redirect_to drive_reports_path
+    end
     @route = Route.new
   end
 
@@ -61,11 +66,5 @@ class Public::RoutesController < ApplicationController
     params.require(:route).permit(:destination, :destination_memo, :status, :destination_image)
   end
 
-  # def ensure_correct_user
-  #   drive_route = DriveRoute.find(params[:drive_route_id])
-  #   drive_report = DriveReport.find(params[:drive_route_id])
-  #   unless drive_route.user == current_user || drive_report.user == current_user
-  #     redirect_back fallback_location: root_path
-  #   end
-  # end
+ 
 end

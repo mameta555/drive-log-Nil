@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :drive_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :routes, dependent: :destroy
-  has_many :drive_report, dependent: :destroy
+  has_many :drive_reports, dependent: :destroy
 
   has_one_attached :profile_image
 

@@ -1,14 +1,13 @@
 class Public::DriveReportsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :ensure_correct_user, except: [:new]
+  before_action :ensure_correct_user, only:[:edit, :update, :destroy, :show]
 
   def new
     @drive_report = DriveReport.new
   end
 
   def create
-    @drive_report = DriveReport.new(drive_report_params)
-    @drive_report.user_id = current_user.id
+    @drive_report = current_user.drive_reports.new(drive_report_params)
     if @drive_report.save
       redirect_to drive_report_routes_path(drive_report_id: @drive_report.id)
     else
@@ -30,7 +29,7 @@ class Public::DriveReportsController < ApplicationController
   end
 
   def index
-    @drive_reports = DriveReport.all
+    @drive_reports = current_user.drive_reports.all
   end
 
   def show
@@ -47,12 +46,12 @@ class Public::DriveReportsController < ApplicationController
 
   private
 
-  # def ensure_correct_user
-  #   @drive_report = DriveReport.find(params[:id])
-  #   unless @drive_report.user == current_user
-  #   redirect_to root_path
-  #   end
-  # end
+  def ensure_correct_user
+    @drive_report = DriveReport.find(params[:id])
+    unless @drive_report.user == current_user
+    redirect_to root_path
+    end
+  end
 
   def drive_report_params
     params.require(:drive_report).permit(:title, :assessment)
