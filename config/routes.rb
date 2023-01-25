@@ -32,7 +32,12 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about' => 'homes#about'
     resources :likes, only: [:index]
-    resources :drive_reports, only: [:new, :create, :edit, :update, :index, :show]
+    resources :drive_reports do
+      get "/routes" => "routes#new"
+      post "/routes" => "routes#drive"
+      delete "/routes/:id" => "routes#erase", as: "route"
+    end
+
     get "search" => "drive_routes#search"
     resources :drive_routes do
       resources :routes, only: [:index, :create, :destroy]
@@ -45,7 +50,7 @@ Rails.application.routes.draw do
         get :likes
       end
     end
-    
+
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

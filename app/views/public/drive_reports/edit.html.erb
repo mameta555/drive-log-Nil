@@ -1,2 +1,13 @@
-<h1>Public::DriveReports#edit</h1>
-<p>Find me in app/views/public/drive_reports/edit.html.erb</p>
+<div class="container m-5">
+  <div class="row">
+    <div class="col">
+      <h2>ドライブ計画タイトル編集</h2>
+      
+      <%= form_with model: @drive_report, url: drive_report_path(@drive_report.id), method: :patch do |f| %>
+        <h5>ドライブタイトル</h5>
+        <%= f.text_field :title %>
+        <%= f.submit '保存' %>
+      <% end %>
+    </div>
+  </div>
+</div>

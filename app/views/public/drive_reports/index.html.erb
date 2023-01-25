@@ -1,2 +1,36 @@
-<h1>Public::DriveReports#index</h1>
-<p>Find me in app/views/public/drive_reports/index.html.erb</p>
+<div class="container mx-auto">
+  <h2>ドライブ計画一覧</h2>
+  <div class="row m-3">
+    <div class="col offset-8">
+      <%= link_to new_drive_report_path, class: "btn btn-primary btn-lg active" do %>
+        計画を追加する<i class="fa-solid fa-car-on"></i>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <tr>
+          <th>ドライブタイトル</th>
+          <th>作成日</th>
+          <th></th>
+        </tr>
+        <% @drive_reports.each do |drive_report| %>
+        <tr>
+
+          <td>
+            <%= link_to drive_report_path(drive_report) do %>
+              <%= drive_report.title %>
+            <% end %>
+          </td>
+          <td><%= drive_report.created_at.strftime('%Y/%m/%d') %></td>
+          <td>
+            <%= link_to "削除", drive_report_path(drive_report.id), method: :delete, class: "btn btn-danger" %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

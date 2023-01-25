@@ -26,6 +26,12 @@
       <!--ゲストユーザーでログイン中のとき（ログインしていて、名前がゲストユーザーのとき）-->
         <% elsif user_signed_in? && current_user.name == "guestuser" %>
           <li class="nav-item">
+            <%= link_to "ドライブ計画", drive_reports_path %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "投稿する", new_drive_route_path %>
+          </li>
+          <li class="nav-item">
             <%= link_to "About", about_path %>
           </li>
           <li class="nav-item">
@@ -37,6 +43,9 @@
 
       <!--ユーザーがログイン中のとき-->
         <% elsif user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "ドライブ計画", new_drive_report_path %>
+          </li>
           <li class="nav-item">
             <%= link_to "投稿する", new_drive_route_path %>
           </li>

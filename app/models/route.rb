@@ -1,6 +1,6 @@
 class Route < ApplicationRecord
   belongs_to :user
-  belongs_to :drive_route
+  belongs_to :drive_route, optional: true
   belongs_to :drive_report, optional: true
   
   has_one_attached :destination_image
