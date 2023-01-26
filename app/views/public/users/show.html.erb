@@ -2,7 +2,7 @@
   <%= flash[:notice] %>
 </div>
 <!--ユーザーのプロフィール（ログインユーザーは編集ボタン表示）-->
-<div class="container mx-auto">
+<div class="container mx-auto m-5">
   <h2><%= @user.name %> さんのページ</h2>
   <div class="row m-3">
     <div class="col-6">
@@ -31,7 +31,9 @@
       <%=link_to likes_user_path(@user), class: "btn btn-primary" do %>
         <i class="fa-solid fa-heart"></i>お気に入り一覧
       <% end %>
-      <%= link_to "ドライブ計画", drive_reports_path, class: 'btn btn-info' %>
+      <% if user_signed_in? && @user == current_user %>
+        <%= link_to "ドライブ計画", drive_reports_path, class: 'btn btn-info' %>
+      <% end %>
     </div>
   </div>
 

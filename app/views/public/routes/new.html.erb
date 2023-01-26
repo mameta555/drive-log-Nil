@@ -1,7 +1,11 @@
-<div class="container">
+<div class="container mx-auto m-5">
   <div class="row">
     <div class="col">
       <h2>行き先の追加</h2>
+      <p>
+        ※こちらで記入された内容は他のユーザーには公開されません<br/>
+        ご自身のメモ用としてご利用ください
+      </p>
       <% if @route.errors.any? %>
         <%= @route.errors.count %>件のエラーが発生しました
         <ul>

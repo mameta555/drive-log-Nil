@@ -44,7 +44,7 @@ Rails.application.routes.draw do
       resources :drive_comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]
     end
-    get '/users/check' => 'users#check'
+    get '/users/:id/check' => 'users#check', as: "check_user"
     resources :users, only: [:index, :edit, :update, :show, :destroy] do
       member do
         get :likes

@@ -23,7 +23,7 @@ class Public::UsersController < ApplicationController
   end
 
   def check
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def destroy

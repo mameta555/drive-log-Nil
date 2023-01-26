@@ -31,6 +31,7 @@ class Public::RoutesController < ApplicationController
     end
   end
 
+  # ドライブレポートの行き先入力・一覧画面
   def new
     @drive_report = DriveReport.find(params[:drive_report_id])
     unless @drive_report.user.id == current_user.id
@@ -39,6 +40,7 @@ class Public::RoutesController < ApplicationController
     @route = Route.new
   end
 
+  # ドライブレポートの行き先作成アクション
   def drive
     @drive_report = DriveReport.find(params[:drive_report_id])
     @route = current_user.routes.new(route_params)
@@ -50,6 +52,7 @@ class Public::RoutesController < ApplicationController
     end
   end
 
+  # ドライブレポートの行き先のレコード削除アクション
   def erase
     @route = Route.find(params[:id])
     @drive_report = DriveReport.find(params[:drive_report_id])
