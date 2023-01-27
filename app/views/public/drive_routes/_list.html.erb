@@ -16,13 +16,13 @@
       </p>
       <% if user_signed_in? && current_user.is_guest? == false %>
         <% if drive_route.liked_by?(current_user) %>
-          <p>
+          <p class="card-text">
             <%= link_to drive_route_likes_path(drive_route), method: :delete do %>
               ♥<%= drive_route.likes.count %>
             <% end %>
           </p>
         <% else %>
-          <p>
+          <p class="card-text">
             <%= link_to drive_route_likes_path(drive_route), method: :post do %>
               ♡<%= drive_route.likes.count %>
             <% end %>

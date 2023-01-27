@@ -9,7 +9,7 @@
           <%= link_to tag.tag_name, drive_routes_path(tag_id: tag.id), class: "btn btn-outline-dark" %>
         <% end %>
       </p>
-      
+
       <% if user_signed_in? %>
         <% if @drive_route.user == current_user %>
           <%= link_to "投稿を削除", drive_route_path(@drive_route.id), method: :delete, "data-confirm" => "この投稿を削除しますか？", class: "btn btn-danger" %>
@@ -58,13 +58,13 @@
 
             <% @drive_route.routes.each do |route| %>
             <tr>
-              <td>
+              <td width="10%">
                 <%= image_tag route.get_destination_image(150,100) %>
               </td>
-              <td>
+              <td width="30%">
                 <%= route.destination %>
               </td>
-              <td>
+              <td width="60%">
                 <%= route.destination_memo %>
               </td>
             </tr>

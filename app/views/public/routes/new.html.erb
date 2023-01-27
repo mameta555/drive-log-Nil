@@ -18,13 +18,13 @@
       <table class="table">
       <% @drive_report.routes.each do |route| %>
       <tr>
-        <td>
+        <td width="10%">
           <%= image_tag route.get_destination_image(150,100) %>
         </td>
-        <td>
+        <td width="30%">
           <%= route.destination %>
         </td>
-        <td>
+        <td width="50%">
           <%= route.destination_memo %>
         </td>
         <td>

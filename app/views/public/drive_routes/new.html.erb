@@ -1,31 +1,37 @@
-<h2>ドライブルート新規投稿</h2>
-<% if @drive_route.errors.any? %>
-  <%= @drive_route.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @drive_route.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: @drive_route do |f| %>
-  <h5>思い出の一枚</h5>
-    <%= f.file_field :image, accept: "image/*" %>
-  <h5>タイトル</h5>
-    <%= f.text_field :title %>
-  <h5>ドライブルートの紹介</h5>
-    <%= f.text_area :body, rows: '5', cols: "50" %>
-  <h5>タグ</h5>
-  <div class='form-group'>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
-    <div class='form-check'>
-      <%= tag.label class: 'form-check-label' do %>
-        <%= tag.check_box class: 'form-check-input' %>
-        <%= tag.text %>
+<div class="container mx-auto m-5">
+  <div class="row">
+    <div class="col">
+      <h2>ドライブルート新規投稿</h2>
+      <% if @drive_route.errors.any? %>
+        <%= @drive_route.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @drive_route.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      
+      <%= form_with model: @drive_route do |f| %>
+        <h5>思い出の一枚</h5>
+          <%= f.file_field :image, accept: "image/*" %>
+        <h5>タイトル</h5>
+          <%= f.text_field :title %>
+        <h5>ドライブルートの紹介</h5>
+          <%= f.text_area :body, rows: '5', cols: "50" %>
+        <h5>タグ</h5>
+        <div class='form-group'>
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+          <div class='form-check'>
+            <%= tag.label class: 'form-check-label' do %>
+              <%= tag.check_box class: 'form-check-input' %>
+              <%= tag.text %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      
+        <%= f.submit '保存' %>
       <% end %>
     </div>
-    <% end %>
   </div>
-
-  <%= f.submit '保存' %>
-<% end %>
+</div>
