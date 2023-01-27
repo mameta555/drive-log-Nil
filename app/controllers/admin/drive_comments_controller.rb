@@ -1,5 +1,5 @@
 class Admin::DriveCommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_admin!
   def destroy
     @comment = DriveComment.find(params[:id])
     @comment.destroy
