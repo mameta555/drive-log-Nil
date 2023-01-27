@@ -20,12 +20,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'homes/top'
-    resources :drive_routes, only: [:index, :show, :destroy]
-    get "search" => "drive_routes#search"
-    resources :users, only: [:index, :show, :update, :destroy]
-    resources :tags, only: [:index, :create, :edit, :update, :destroy] do
+    resources :drive_routes, only: [:index, :show, :destroy] do
       resources :drive_comments, only: [:destroy]
     end
+    get "search" => "drive_routes#search"
+    resources :users, only: [:index, :show, :update, :destroy]
+    resources :tags, only: [:index, :create, :edit, :update, :destroy]
+
   end
 
   scope module: :public do

@@ -11,7 +11,7 @@ class Public::DriveCommentsController < ApplicationController
   def destroy
     comment = DriveComment.find(params[:id])
     comment.destroy
-    redirect_back(fallback_location: root_path)
+    redirect_to drive_route_path(params[:drive_route_id])
   end
 
   private
