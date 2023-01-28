@@ -11,24 +11,8 @@
         </ul>
       <% end %>
 
-      <table class="table">
-      <% @drive_route.routes.each do |route| %>
-      <tr>
-        <td width="10%">
-          <%= image_tag route.get_destination_image(150,100) %>
-        </td>
-        <td width="30%">
-          <%= route.destination %>
-        </td>
-        <td width="50%">
-          <%= route.destination_memo %>
-        </td>
-        <td width="10%">
-          <%= link_to "削除", drive_route_route_path(route.drive_route, route), method: :delete, class: "btn btn-danger" %>
-        </td>
-      </tr>
-      <% end %>
-      </table>
+      <!--行き先の一覧-->
+      <%= render 'drive_route_index', drive_route: @drive_route %>
     </div>
   </div>
 

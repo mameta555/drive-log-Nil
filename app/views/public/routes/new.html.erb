@@ -4,7 +4,7 @@
       <h2>行き先の追加</h2>
       <p>
         ※こちらで記入された内容は他のユーザーには公開されません<br/>
-        ご自身のメモ用としてご利用ください
+        ご自身のメモとしてご利用ください
       </p>
       <% if @route.errors.any? %>
         <%= @route.errors.count %>件のエラーが発生しました
@@ -27,7 +27,7 @@
         <td width="50%">
           <%= route.destination_memo %>
         </td>
-        <td>
+        <td width="10%">
           <%= link_to "削除", drive_report_route_path(drive_report_id: route.drive_report, id: route.id), method: :delete, class: "btn btn-danger" %>
         </td>
       </tr>

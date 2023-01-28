@@ -2,9 +2,17 @@
   <div class="row">
     <div class="col">
       <h2>ドライブ計画作成</h2>
+        <% if @drive_report.errors.any? %>
+        <%= @drive_report.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @drive_report.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+        <% end %>
       <p>
         ※こちらで記入された内容は公開されません<br/>
-        ご自身のメモ用としてご利用ください
+        ご自身のメモとしてご利用ください
       </p>
       <%= form_with model: @drive_report do |f| %>
         <h5>ドライブタイトル</h5>
