@@ -1,0 +1,6 @@
+ja:
+  enums:
+    route:
+      status:
+        yet: "ドライブ予定"
+        already: "ドライブ済み"

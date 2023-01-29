@@ -1,9 +1,9 @@
 <div>
   <%= flash[:notice] %>
 </div>
-<div class="card text-white">
+<div class="card text-white", style="margin-top:100px">
   <%= image_tag "sunset.jpg", width: '100%', class: "card-img cover-img" %>
-  <div class="card-img-overlay">
+  <div class="card-img-overlay", style="margin:">
     <h1 class="card-title">Drivelog-Nilへようこそ</h1>
     <p class="card-text h3">目標のない運転練習に目的地を。</p>
     <p class="card-text h3">みんなで作る初心者ドライバーのための投稿サイト</p>
@@ -21,8 +21,8 @@
             <div class="row">
               <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
             </div>
-            <div class="row m-3">
-              <%= link_to "すべての投稿を見る>", drive_routes_path %>
+            <div class="row m-3 d-flex justify-content-center">
+              <%= link_to "すべての投稿を見る>", drive_routes_path ,class: "btn btn-outline-primary"%>
             </div>
           </div>
         </div>

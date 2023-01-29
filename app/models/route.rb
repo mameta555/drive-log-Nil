@@ -8,6 +8,8 @@ class Route < ApplicationRecord
   validates :destination, presence: true
   validates :status, presence: true
   
+  enum status: { yet: 0, already: 1 }
+  
   def get_destination_image(width, height)
     unless destination_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
