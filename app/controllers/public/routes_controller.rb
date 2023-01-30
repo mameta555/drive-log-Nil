@@ -1,13 +1,13 @@
 class Public::RoutesController < ApplicationController
   before_action :authenticate_user!
-  
+
 
   def create
     @drive_route = DriveRoute.find(params[:drive_route_id])
     @route = current_user.routes.new(route_params)
     @route.drive_route_id = @drive_route.id
     if @route.save
-      redirect_to drive_route_routes_path(@drive_route.id)
+      flash[:notice] = "行き先を追加しました"
     else
       render :index
     end
@@ -23,9 +23,9 @@ class Public::RoutesController < ApplicationController
 
   def destroy
     @route = Route.find(params[:id])
+    @drive_route = DriveRoute.find(params[:drive_route_id])
     if @route.destroy
-      drive_route = DriveRoute.find(params[:drive_route_id])
-      redirect_to drive_route_routes_path(drive_route.id)
+      flash[:notice] = "行き先を削除しました"
     else
       render :index
     end
@@ -46,7 +46,7 @@ class Public::RoutesController < ApplicationController
     @route = current_user.routes.new(route_params)
     @route.drive_report_id = @drive_report.id
     if @route.save
-      redirect_to drive_report_routes_path(@drive_report.id)
+      flash[:notice] = "行き先を追加しました"
     else
       render :new
     end
@@ -57,7 +57,7 @@ class Public::RoutesController < ApplicationController
     @route = Route.find(params[:id])
     @drive_report = DriveReport.find(params[:drive_report_id])
     if @route.destroy
-      redirect_to drive_report_routes_path(@drive_report.id)
+      flash[:notice] = "行き先を削除しました"
     else
       render :new
     end
@@ -69,5 +69,5 @@ class Public::RoutesController < ApplicationController
     params.require(:route).permit(:destination, :destination_memo, :status, :destination_image)
   end
 
- 
+
 end

@@ -14,39 +14,20 @@
           <% end %>
         </ul>
       <% end %>
-
-      <table class="table">
-      <% @drive_report.routes.each do |route| %>
-      <tr>
-        <td width="10%">
-          <%= image_tag route.get_destination_image(150,100) %>
-        </td>
-        <td width="30%">
-          <%= route.destination %>
-        </td>
-        <td width="50%">
-          <%= route.destination_memo %>
-        </td>
-        <td width="10%">
-          <%= link_to "削除", drive_report_route_path(drive_report_id: route.drive_report, id: route.id), method: :delete, class: "btn btn-danger" %>
-        </td>
-      </tr>
-      <% end %>
-      </table>
+      
+      <!--行き先一覧テーブル-->
+      <div class="route_index">
+        <%= render "report_index", drive_report: @drive_report %>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <%= form_with model: [@drive_report, @route], url: drive_report_routes_path(@drive_report.id, @route.id), method: :post do |f| %>
-        <h5>行き先の画像</h5>
-        <%= f.file_field :destination_image, accept: "image/*" %>
-        <h5>行き先</h5>
-        <%= f.text_field :destination, rows: '5', placeholder: "行き先をこちらに" %>
-        <h5>行き先情報</h5>
-        <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに" %>
-        <%= f.submit "追加する" %>
-      <% end %>
+      <!--行き先投稿フォーム-->
+      <div class="route_area">
+        <%= render "report_form", drive_report: @drive_report, route: @route %>
+      </div>
 
       <p><%= link_to "投稿を完了する", drive_report_path(@drive_report), class: "btn btn-primary" %></p>
     </div>

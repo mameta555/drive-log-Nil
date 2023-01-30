@@ -33,12 +33,6 @@ class Public::SessionsController < Devise::SessionsController
       return if !@user
       ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
       if @user.valid_password?(params[:user][:password])
-      ## 【処理内容3】退会済みのユーザーかどうか判別（is_deletedがtrueであれば新規登録画面へ）
-        if @user.is_deleted == true
-          flash[:danger] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
-          redirect_to new_user_registration_path
-        end
-      # パスワードが一致していて退会ステータスがfalseの場合はそのまま処理を実行
 
       else
         # パスワードが一致しないときはログイン画面に戻る

@@ -2,14 +2,12 @@ class Route < ApplicationRecord
   belongs_to :user
   belongs_to :drive_route, optional: true
   belongs_to :drive_report, optional: true
-  
+
   has_one_attached :destination_image
-  
+
   validates :destination, presence: true
-  validates :status, presence: true
-  
-  enum status: { yet: 0, already: 1 }
-  
+
+
   def get_destination_image(width, height)
     unless destination_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

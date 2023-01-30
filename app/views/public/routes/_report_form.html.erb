@@ -1,0 +1,9 @@
+<%= form_with model: [drive_report, route], url: drive_report_routes_path(drive_report.id, route.id), method: :post, local: false do |f| %>
+  <h5>行き先の画像</h5>
+  <%= f.file_field :destination_image, accept: "image/*", class: "route_form" %>
+  <h5>行き先</h5>
+  <%= f.text_field :destination, rows: '5', placeholder: "行き先をこちらに", class: "route_form" %>
+  <h5>行き先情報</h5>
+  <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに", class: "route_form" %>
+  <%= f.submit "追加する" %>
+<% end %>

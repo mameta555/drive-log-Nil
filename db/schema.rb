@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2023_01_13_094344) do
   create_table "drive_reports", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "assessment"
+    t.integer "status", default: 0, null: false
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -88,7 +89,6 @@ ActiveRecord::Schema.define(version: 2023_01_13_094344) do
     t.integer "drive_route_id"
     t.string "destination", null: false
     t.text "destination_memo"
-    t.string "status", default: "0"
     t.integer "drive_report_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -115,7 +115,6 @@ ActiveRecord::Schema.define(version: 2023_01_13_094344) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.text "introduction"
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
