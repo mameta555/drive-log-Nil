@@ -49,7 +49,8 @@ class Public::DriveReportsController < ApplicationController
   def ensure_correct_user
     @drive_report = DriveReport.find(params[:id])
     unless @drive_report.user == current_user
-    redirect_to root_path
+      flash[:notice] = "他のユーザーのページには遷移できません"
+      redirect_to drive_reports_path
     end
   end
 
