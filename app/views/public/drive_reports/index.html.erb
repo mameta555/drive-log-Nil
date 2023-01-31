@@ -4,7 +4,11 @@
 <div class="container mx-auto m-5">
   <h2>ドライブ計画一覧</h2>
   <div class="row m-3">
-    <div class="col offset-8">
+    <div class="col">
+      <!--<= link_to drive_reports_path(status: yet) do %>-->
+      <!--      <= @drive_report.status_i18n %>-->
+      <!--< end %>-->
+
       <%= link_to new_drive_report_path, class: "btn btn-primary btn-lg active" do %>
         計画を追加する<i class="fa-solid fa-car-on"></i>
       <% end %>
@@ -16,6 +20,7 @@
       <table class="table">
         <tr>
           <th>ドライブタイトル</th>
+          <th>ステータス</th>
           <th>作成日</th>
           <th></th>
         </tr>
@@ -28,9 +33,9 @@
             <% end %>
           </td>
           <!--行き先のステータス-->
-          <!--<td>-->
-          <!--  <= drive_report.routes.status %>-->
-          <!--</td>-->
+          <td>
+            <%= drive_report.status_i18n %>
+          </td>
           <td><%= drive_report.created_at.strftime('%Y/%m/%d') %></td>
           <td>
             <%= link_to "削除", drive_report_path(drive_report.id), method: :delete, class: "btn btn-danger" %>

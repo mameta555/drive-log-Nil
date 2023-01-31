@@ -20,6 +20,7 @@ class Public::DriveReportsController < ApplicationController
   end
 
   def update
+
     @drive_report = DriveReport.find(params[:id])
     if @drive_report.update(drive_report_params)
       redirect_to drive_report_path(@drive_report.id)
@@ -55,6 +56,6 @@ class Public::DriveReportsController < ApplicationController
   end
 
   def drive_report_params
-    params.require(:drive_report).permit(:title, :assessment)
+    params.require(:drive_report).permit(:title, :assessment).merge({status: params[:drive_report][:status].to_i})
   end
 end

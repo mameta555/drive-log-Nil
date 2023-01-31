@@ -6,6 +6,7 @@ class Route < ApplicationRecord
   has_one_attached :destination_image
 
   validates :destination, presence: true
+  
 
 
   def get_destination_image(width, height)

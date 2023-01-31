@@ -3,4 +3,6 @@ class DriveReport < ApplicationRecord
   has_many :routes, dependent: :destroy
   
   validates :title, presence: true
+  
+  enum status: { yet: 0, already: 1 }
 end
