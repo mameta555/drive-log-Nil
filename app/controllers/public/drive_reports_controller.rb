@@ -30,7 +30,12 @@ class Public::DriveReportsController < ApplicationController
   end
 
   def index
-    @drive_reports = current_user.drive_reports.all
+    
+    if params[:status]
+      @drive_reports = current_user.drive_reports.all(params[:status])
+    else
+      @drive_reports = current_user.drive_reports.all
+    end
   end
 
   def show
