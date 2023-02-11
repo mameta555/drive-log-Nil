@@ -1,6 +1,7 @@
 <div>
   <%= flash[:notice] %>
 </div>
+
 <div class="card text-white">
   <%= image_tag "sunset.jpg", width: '100%', class: "card-img cover-img" %>
   <div class="card-img-overlay", style="margin:">
@@ -9,25 +10,22 @@
     <p class="card-text h3">みんなで作る初心者ドライバーのための投稿サイト</p>
   </div>
 </div>
+
 <div class="container mt-3">
   <div class="row">
+    
     <div class="col-8">
-      <div class="container">
-
-
-        <div class="row">
-          <div class="container">
-            <h2>新着投稿</h2>
-            <div class="row">
-              <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
-            </div>
-            <div class="row m-3 d-flex justify-content-center">
-              <%= link_to "すべての投稿を見る>", drive_routes_path ,class: "btn btn-outline-primary"%>
-            </div>
-          </div>
+      <h2>新着投稿</h2>
+      <div class="row">
+        <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
+      </div>
+      <div class="row m-3">
+        <div class="col d-flex justify-content-center">
+          <%= link_to "すべての投稿を見る>", drive_routes_path ,class: "btn btn-outline-primary"%>
         </div>
       </div>
     </div>
+    
     <div class="col-3 offset-1">
       <h2>タグ</h2>
       <ul class="list-group-flush">
@@ -44,5 +42,6 @@
         </li>
       </ul>
     </div>
+    
   </div>
 </div>
