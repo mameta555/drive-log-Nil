@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 2023_01_13_094344) do
     t.string "destination", null: false
     t.text "destination_memo"
     t.integer "drive_report_id"
+    t.float "lat"
+    t.float "lng"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

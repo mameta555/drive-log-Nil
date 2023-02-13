@@ -4,19 +4,19 @@
 
 <div class="card text-white">
   <%= image_tag "sunset.jpg", width: '100%', class: "card-img cover-img" %>
-  <div class="card-img-overlay", style="margin:">
-    <h1 class="card-title">Drivelog-Nilへようこそ</h1>
-    <p class="card-text h3">目標のない運転練習に目的地を。</p>
-    <p class="card-text h3">みんなで作る初心者ドライバーのための投稿サイト</p>
+  <div class="card-img-overlay">
+    <h1 class="main-title card-title display-5 mb-2">Drivelog-Nilへようこそ</h1>
+    <p class="card-text lg-h3">目標のない運転練習に目的地を。</p>
+    <p class="card-text lg-h3">みんなで作る初心者ドライバーのための投稿サイト</p>
   </div>
 </div>
 
 <div class="container mt-3">
   <div class="row">
-    
-    <div class="col-8">
+
+    <div class="col-xs-12 col-lg-9">
       <h2>新着投稿</h2>
-      <div class="row">
+      <div class="post row d-flex justify-content-center">
         <%= render "public/drive_routes/list", drive_routes: @drive_routes %>
       </div>
       <div class="row m-3">
@@ -25,8 +25,8 @@
         </div>
       </div>
     </div>
-    
-    <div class="col-3 offset-1">
+
+    <div class="col-xs-12 col-lg-3">
       <h2>タグ</h2>
       <ul class="list-group-flush">
         <% @tags.each do |tag| %>
@@ -42,6 +42,6 @@
         </li>
       </ul>
     </div>
-    
+
   </div>
 </div>

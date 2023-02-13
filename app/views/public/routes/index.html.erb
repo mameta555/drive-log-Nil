@@ -14,10 +14,12 @@
           <% end %>
         </ul>
       <% end %>
+
       <div class="route_table">
         <!--行き先の一覧-->
         <%= render 'drive_route_index', drive_route: @drive_route %>
       </div>
+
     </div>
   </div>
 
@@ -29,5 +31,61 @@
       </div>
       <p><%= link_to "編集を終わる", drive_route_path(@drive_route), class: "btn btn-primary" %></p>
     </div>
+
+    <div class="col">
+      <div id='map'></div>
+    </div>
+
   </div>
 </div>
+
+<!--<style>-->
+<!--#map {-->
+<!--  height: 500px;-->
+<!--  width: 500px;-->
+<!--}-->
+<!--</style>-->
+
+<!--<script>-->
+<!--  var map;-->
+<!--  var marker;-->
+<!--  var infoWindow;-->
+
+<!--  function initMap() {-->
+<!--    geocoder = new google.maps.Geocoder()-->
+
+    <!--//初期表示位置-->
+<!--    let latlng = new google.maps.LatLng(38.60, 139.5);-->
+
+    <!--//デザイン-->
+
+
+<!--    let map = new google.maps.Map(document.getElementById('map'), {-->
+<!--          zoom: 12,-->
+<!--          center: latlng-->
+<!--      });-->
+<!--    let transitLayer = new google.maps.TransitLayer();-->
+<!--    transitLayer.setMap(map);-->
+      
+    <!--// 複数マーカー-->
+<!--    <= @drive_route.routes.each do |route| %>-->
+<!--      ( function() {-->
+<!--        let markerLatLng = {lat:<= route.lat %>, lng: <= route.lng %> };-->
+<!--        let marker = new google.maps.Marker({-->
+<!--          position: markerLatLng,-->
+<!--          map: map-->
+<!--        });-->
+        
+<!--        let infowindow = new google.maps.InfoWindow({-->
+<!--          position: markerLatLng-->
+<!--          content: "<= route.destination %>"-->
+<!--        });-->
+<!--        marker.addListener('click', function() {-->
+<!--          infowindow.opan(map,marker);-->
+<!--        });-->
+        
+<!--      })();-->
+<!--    < end %>-->
+<!--  }-->
+<!--</script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>-->
