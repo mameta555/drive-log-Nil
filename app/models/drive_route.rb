@@ -2,6 +2,7 @@ class DriveRoute < ApplicationRecord
   has_many :drive_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :routes, dependent: :destroy
+  accepts_nested_attributes_for :routes, allow_destroy: true
   has_many :tag_relationships, dependent: :destroy
   has_many :tags, through: :tag_relationships
   belongs_to :user

@@ -1,12 +1,12 @@
 class Route < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :drive_route, optional: true
   belongs_to :drive_report, optional: true
 
   has_one_attached :destination_image
 
   validates :destination, presence: true
-  
+
 
 
   def get_destination_image(width, height)

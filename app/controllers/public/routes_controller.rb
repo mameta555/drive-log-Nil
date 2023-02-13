@@ -14,7 +14,7 @@ class Public::RoutesController < ApplicationController
   end
 
   def index
-    @drive_route = DriveRoute.find(params[:drive_route_id])
+    @drive_route = DriveRoute.new
     unless @drive_route.user_id == current_user.id
       redirect_to drive_route_path(@drive_route.id)
     end

@@ -12,20 +12,28 @@
       <% end %>
       
       <%= form_with model: @drive_route, url: drive_route_path(@drive_route.id), method: :patch do |f| %>
-        <h5>思い出の一枚</h5>
-        <%= f.file_field :image, accept: "image/*" %>
-      
-        <h5>タイトル</h5>
-        <%= f.text_field :title %>
-      
-        <h5>ドライブルートの紹介</h5>
-        <%= f.text_area :body, rows: '5', cols: "50" %>
-      
-        <h5>タグ</h5>
-        <!--@drive_route.tag_idsでチェックしたタグを取得し、.map(&:to_param)で選択していたタグのチェックをつける-->
-        <!--{checked：}と.map(&:to_param)は固定-->
-        <!--DriveRouteで保存するのはタグのid(tag_ids)なのでupdateアクションはいつも通り-->
         <div class='form-group'>
+          <h5>思い出の一枚</h5>
+          <%= f.file_field :image, accept: "image/*" %>
+        </div>
+        
+        <div class='form-group'>
+          <h5>タイトル</h5>
+          <%= f.text_field :title %>
+        </div>
+        
+        <div class='form-group'>
+          <h5>ドライブルートの紹介</h5>
+          <%= f.text_area :body, rows: '5', cols: "50" %>
+        </div>
+      
+        
+        
+        <div class='form-group'>
+          <h5>タグ</h5>
+          <!--@drive_route.tag_idsでチェックしたタグを取得し、.map(&:to_param)で選択していたタグのチェックをつける-->
+          <!--{checked：}と.map(&:to_param)は固定-->
+          <!--DriveRouteで保存するのはタグのid(tag_ids)なのでupdateアクションはいつも通り-->
           <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name, {checked: @drive_route.tag_ids.map(&:to_param) }) do |tag| %>
           <div class='form-check'>
             <%= tag.label class: 'form-check-label' do %>
@@ -35,10 +43,17 @@
           </div>
           <% end %>
         </div>
+        <%= f.fields_for :routes do |ff| %>
+          <%= render 'public/drive_routes/route_fields', f: ff %>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association "行き先を追加", f, :routes %>
+        </div>
       
         <%= f.submit "変更を保存" %>
       
       <% end %>
+      
     </div>
   </div>
 </div>

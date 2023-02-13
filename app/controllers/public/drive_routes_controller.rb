@@ -4,14 +4,13 @@ class Public::DriveRoutesController < ApplicationController
   
   def new
     @drive_route = DriveRoute.new
-    @route = Route.new
+    @drive_route.routes.build
   end
 
   def create
-    @drive_route = DriveRoute.new(drive_route_params)
-    @drive_route.user_id = current_user.id
+    @drive_route = current_user.drive_routes.build(drive_route_params)
     if @drive_route.save
-      redirect_to drive_route_routes_path(@drive_route.id)
+      redirect_to drive_route_path(@drive_route)
     else
       render :new
     end
@@ -63,7 +62,8 @@ class Public::DriveRoutesController < ApplicationController
   private
 # 投稿一つにつきタグは複数なのでtag_idsと複数形
   def drive_route_params
-    params.require(:drive_route).permit(:title, :image, :body, tag_ids: [])
+    params.require(:drive_route).permit(:title, :image, :body, tag_ids: [],
+                                        routes_attributes: [:id, :destination_image, :destination, :destination_memo, :_destroy])
   end
   
   def ensure_correct_user

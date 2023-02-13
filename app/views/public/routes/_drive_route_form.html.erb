@@ -1,4 +1,5 @@
-<%= form_with model: [drive_route, route], url: drive_route_routes_path, local: false do |f| %>
+<%#= form_with model: [drive_route, route], url: drive_route_routes_path, local: false do |f| %>
+<%= form_with scope: :test, url: "#", local: false do |f| %>
   <h5>行き先の画像</h5>
   <%= f.file_field :destination_image, accept: "image/*", class: "route_image" %>
   <h5>行き先</h5>

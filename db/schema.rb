@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2023_01_13_094344) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.integer "drive_route_id"
     t.string "destination", null: false
     t.text "destination_memo"

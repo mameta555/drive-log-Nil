@@ -1,0 +1,9 @@
+    <div class="nested-fields">
+      <h5>行き先の画像</h5>
+      <%= f.file_field :destination_image, accept: "image/*", class: "route_image" %>
+      <h5>行き先</h5>
+      <%= f.text_field :destination, rows: '5', placeholder: "行き先をこちらに", class: "route_place" %>
+      <h5>行き先情報</h5>
+      <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに", class: "route_infomation" %>
+      <%= link_to_remove_association "削除", f %>
+    </div>
