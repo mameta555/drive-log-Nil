@@ -1,6 +1,6 @@
 <div class="container mx-auto m-5">
   <div class="row">
-    <div class="col-8">
+    <div class="col-md-8 col-sm-12">
 
       <div class="row">
         <div class="col">
@@ -55,9 +55,7 @@
       <div class="row mt-5">
         <div class="col">
           <h3>ドライブルート</h3>
-          <% if @drive_route.user == current_user %>
-            <%= link_to "行き先を編集", drive_route_routes_path(@drive_route.id), class: "btn btn-success" %>
-          <% end %>
+          
           <table class="table">
           <% @drive_route.routes.each do |route| %>
           <tr>
@@ -78,7 +76,7 @@
 
       <!--<div class="row">-->
       <!--  <div class="col">-->
-      <!--    <div id='map'></div>-->
+      <!--    <div id='map' style="height: 400px; width: 400px;"></div>-->
       <!--  </div>-->
       <!--</div>-->
 
@@ -88,20 +86,34 @@
           <div>
             <p>コメント件数：<%= @drive_route.drive_comments.count %></p>
             <% @drive_route.drive_comments.each do |drive_comment| %>
-              <p>
-                <%= link_to user_path(drive_comment.user.id) do %>
-                  <%= image_tag drive_comment.user.get_profile_image(30,30), class: "rounded-circle" %><%= drive_comment.user.name %>
-                <% end %>
-              </p>
-              <p>
-                コメント日：<%= drive_comment.created_at.strftime('%Y/%m/%d') %>
-                <% if drive_comment.user == current_user %>
-                  <%= link_to "削除", drive_route_drive_comment_path(drive_comment.drive_route, drive_comment),method: :delete , class: "btn btn-danger" %>
-                <% end %>
-              </p>
-              <%= drive_comment.comment %>
+            <div class="row">
+              <div class="col">
+                <p>
+                  <%= link_to user_path(drive_comment.user.id) do %>
+                    <%= image_tag drive_comment.user.get_profile_image(30,30), class: "rounded-circle" %><%= drive_comment.user.name %>
+                  <% end %>
+                </p>
+              </div>
+              <div class="col">
+                <p>
+                  <%= drive_comment.created_at.strftime('%Y/%m/%d') %>
+                  <% if drive_comment.user == current_user %>
+                    <%= link_to "削除", drive_route_drive_comment_path(drive_comment.drive_route, drive_comment),method: :delete , class: "btn btn-danger" %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <%= drive_comment.comment %>
+              </div>
+            </div>
             <% end %>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <div class="mt-3">
             <%= form_with model: [@drive_route, @drive_comment] do |f| %>
               <%= f.text_area :comment, rows: '5', cols: '40', placeholder: "コメントをここに"%>
@@ -110,24 +122,28 @@
           </div>
         </div>
       </div>
+      
     </div>
 
-    <div class="col-3 offset-md-1" style="text-align:center;">
-      <table class="table">
-        <tr>
-          <th>
-            投稿者
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <%= link_to user_path(@drive_route.user.id) do %>
-              <%= image_tag @drive_route.user.get_profile_image(100,100), class: "rounded-circle" %><br>
-              <%= @drive_route.user.name %>
-            <% end %>
-          </th>
-        </tr>
-      </table>
+    <div class="col-md-4 col-sm-12" style="text-align:center">
+      <div class="row">
+        <div class="col">
+          投稿者
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= link_to user_path(@drive_route.user.id) do %>
+            <%= image_tag @drive_route.user.get_profile_image(100,100), class: "rounded-circle" %><br>
+            <%= @drive_route.user.name %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= @drive_route.user.introduction %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -160,14 +176,14 @@
 <!--    position:  {lat: 40.7828, lng:-73.9653},-->
 <!--    map: map-->
 <!--  });-->
-  
+
   <!--infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加-->
   <!--      content: '<div class="map"><= @drive_route.routes.destination_memo %></div>' // 吹き出しに表示する内容-->
 <!--  });-->
  <!--marker.addListener('click', function() { // マーカーをクリックしたとき-->
  <!--    infoWindow.open(map, marker); // 吹き出しの表示-->
 <!--    });-->
-  
+
 <!--}-->
 <!--</script>-->
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=< ENV['API_KEY']%>&callback=initMap" async defer></script>-->
