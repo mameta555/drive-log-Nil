@@ -1,7 +1,7 @@
 class Public::DriveRoutesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :search, :index]
   before_action :ensure_correct_user, only: [:edit, :update]
-  
+
   def new
     @drive_route = DriveRoute.new
     @drive_route.routes.build
@@ -63,9 +63,9 @@ class Public::DriveRoutesController < ApplicationController
 # 投稿一つにつきタグは複数なのでtag_idsと複数形
   def drive_route_params
     params.require(:drive_route).permit(:title, :image, :body, tag_ids: [],
-                                        routes_attributes: [:id, :destination_image, :destination, :destination_memo, :_destroy])
+      routes_attributes: [:id, :destination_image, :destination, :destination_memo, :lat, :lng, :_destroy])
   end
-  
+
   def ensure_correct_user
     @drive_route = DriveRoute.find(params[:id])
     unless @drive_route.user == current_user
