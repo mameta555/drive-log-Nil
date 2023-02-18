@@ -11,11 +11,39 @@ header {
   font-family: 'Kaushan', cursive, sans-serif;
 }
 
+main {
+  margin-bottom: 20px;
+
+}
+
+h1,h2 {
+  font-family:"Kokoro";
+}
+
 .card-title {
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+footer {
+  width: 100%;
+
+}
+
+.card-img-overlay {
+  background-color: rgba( 0, 0, 0, 0.5);
+}
+
+/* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+@media screen and (max-width:1024px) {
+  .about_title {
+    font-size: 40px;
+  }
+  .about_text {
+    font-size: 20px;
+  }
 }
 
 /* スマートフォンサイズ（425px）以下の際に適用される設定 */
@@ -30,4 +58,19 @@ header {
   .main-title {
     font-size: 20px;
   }
+
+  .about_title {
+   font-size: 10px;
+  }
+  .about_text {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width:320px) {
+  .about_title {
+   display:none;
+  }
+
+
 }
