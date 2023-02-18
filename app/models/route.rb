@@ -6,8 +6,8 @@ class Route < ApplicationRecord
   has_one_attached :destination_image
 
   validates :destination, presence: true
-  validates :lat, presence: true
-  validates :lng, presence: true
+  # validates :lat, presence: true
+  # validates :lng, presence: true
 
 
 

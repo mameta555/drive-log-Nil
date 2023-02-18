@@ -9,7 +9,7 @@ class Public::DriveReportsController < ApplicationController
   def create
     @drive_report = current_user.drive_reports.new(drive_report_params)
     if @drive_report.save
-      redirect_to drive_report_routes_path(drive_report_id: @drive_report.id)
+      redirect_to drive_report_path(@drive_report.id)
     else
       render :new
     end
@@ -61,6 +61,8 @@ class Public::DriveReportsController < ApplicationController
   end
 
   def drive_report_params
-    params.require(:drive_report).permit(:title, :assessment).merge({status: params[:drive_report][:status].to_i})
+    params.require(:drive_report).permit(:title, :assessment, 
+    routes_attributes: [:id, :destination_image, :destination, :destination_memo, :_destroy]
+    ).merge({status: params[:drive_report][:status].to_i})
   end
 end

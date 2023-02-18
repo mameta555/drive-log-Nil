@@ -1,0 +1,31 @@
+    <div class="nested-fields" <% unless f.index.nil? %>data-index="<%= f.index %>"<% end %>>
+      <div class="form-group">
+        <h5>行き先の画像</h5>
+        <%= f.file_field :destination_image, accept: "image/*", class: "route_image" %>
+      </div>
+      <div class="form-group">
+        <h5>行き先</h5>
+        <%= f.text_field :destination, rows: '5', placeholder: "行き先をこちらに", class: "route_place" %>
+      </div>
+      <div class="form-group">
+        <h5>行き先情報</h5>
+        <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに", class: "route_infomation" %>
+      </div>
+      <!--<button type="button" class="nested-input-latlon-button">行き先の名前から緯度経度を入力</button>-->
+      <!--<div class="form-group mt-3">-->
+      <!--  <h5>緯度</h5>-->
+      <!--  <%#= f.text_field :lat,:value =>"緯度" %>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+      <!--  <h5>経度</h5>-->
+      <!--  <%#= f.text_field :lng,:value =>"経度" %>-->
+      <!--</div>-->
+      <!--<div class="nested-map"-->
+      <!--  style="width: 200px; height: 200px;"-->
+      <!-->
+      <!--</div>-->
+      
+      <div class="m-3">
+        <%= link_to_remove_association "行き先を削除", f, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
