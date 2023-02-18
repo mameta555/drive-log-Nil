@@ -78,10 +78,12 @@
           <%= render 'public/drive_routes/route_fields', f: ff %>
         <% end %>
 
-        <div class='links'>
-          <%= link_to_add_association "行き先を追加", f, :routes %>
+        <div class='links m-3'>
+          <%= link_to_add_association "行き先を追加", f, :routes, class: "btn btn-outline-success" %>
         </div>
-        <%= f.submit '保存' %>
+        <div class="mt-5 d-flex justify-content-center">
+          <%= f.submit '投稿する', class: "btn btn-primary btn-lg" %>
+        </div>
       <% end %>
     </div>
   </div>

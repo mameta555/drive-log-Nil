@@ -76,6 +76,7 @@
 
       <div class="row">
         <div class="col">
+          
           <div id='map' style="height: 400px; width: 400px;"></div>
         </div>
       </div>
@@ -151,24 +152,27 @@
 
 
 <script>
-let map
-// var center = {
-//   lat: 34.7019399, // 緯度
-//   lng: 135.51002519999997 // 経度
-// };
+  function initMap() {
 
-function initMap(){
-  geocoder = new google.maps.Geocoder()
+      //初期表示位置
+      let latlng = new google.maps.LatLng(38.60, 139.5);
+      //デザイン
+      let styles = [
+           {
+            stylers: [
+             { "saturation": 0 },
+             { "lightness": 0 }
+            ]
+           }
+          ];
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.6809591, lng: 139.7673068},
-    zoom: 12,
-  });
-
-  marker = new google.maps.Marker({
-    position:  {lat: 35.6809591, lng: 139.7673068},
-    map: map
-  });
+      let map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          styles: styles,
+          center: latlng
+      });
+      let transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
   
 //複数マーカー ここから
   <% @drive_route.routes.each do |route|%>
@@ -176,27 +180,21 @@ function initMap(){
       let markerLatLng = { lat: <%= route.lat %>, lng: <%= route.lng %> }; // 緯度経度のデータ作成
       let marker = new google.maps.Marker({ 
         position: markerLatLng, 
-        map: map 
+        map: map
       });
-      
+//マーカーをクリックしたとき、詳細情報を表示
       let infowindow = new google.maps.InfoWindow({
         position: markerLatLng,
         content: "<%= route.destination %>"
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-          });
-  <% end %>
+      }); //ここで行き先名が表示される
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
 
-//   infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-//         content: '<div class="map"><= @drive_route.routes.destination_memo %></div>' // 吹き出しに表示する内容
-//   });
-// marker.addListener('click', function() { // マーカーをクリックしたとき
-//     infoWindow.open(map, marker); // 吹き出しの表示
-//     });
-
+       })();
+      <% end %>
+      //複数マーカー ここまで 
 }
-
-
-
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
