@@ -13,12 +13,18 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
   </head>
 
-  <body class="d-flex flex-column vh-100 mb-5">
-    <%= render 'layouts/header' %>
-    <main class="mb-5">
-      <%= yield %>
-    </main>
-    <div></div>
+  <body>
+    
+      <%= render 'layouts/header' %>
+    <div class="container">
+      <main class="mb-5">
+        <%= yield %>
+        <div></div>
+      </main>
+      
+    </div>
     <%= render 'layouts/footer' %>
+    
   </body>
+  
 </html>
