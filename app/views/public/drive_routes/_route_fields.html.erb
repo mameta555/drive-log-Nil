@@ -6,9 +6,9 @@
       <h5>行き先情報</h5>
       <%= f.text_area :destination_memo, rows: '5', cols: "40", placeholder: "行き先情報をこちらに", class: "route_infomation" %>
       <button type="button" class="nested-input-latlon-button">行き先の名前から緯度経度を入力</button>
-      <!--緯度-->
+      緯度
       <%= f.text_field :lat,:value =>"緯度" %>
-      <!--経度-->
+      経度
       <%= f.text_field :lng,:value =>"経度" %>
       <div class="nested-map"
         style="width: 200px; height: 200px;"

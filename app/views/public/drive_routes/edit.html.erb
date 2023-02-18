@@ -56,4 +56,89 @@
       
     </div>
   </div>
+  
+  <script>
+
+function codeAddress(e){
+  let div_nested_fields = e.target.parentElement
+  let index = e.target.parentElement.dataset.index
+  let geocoder = new google.maps.Geocoder()
+
+  let inputAddress = div_nested_fields.querySelector(
+    '#drive_route_routes_attributes_' + index + '_destination'
+  ).value
+  let formLat = div_nested_fields.querySelector(
+    '#drive_route_routes_attributes_' + index + '_lat'
+
+  )
+  let formLng = div_nested_fields.querySelector(
+    '#drive_route_routes_attributes_' + index + '_lng'
+  )
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      let marker = map_markers[index]
+      if (marker !== undefined) {
+        marker.setMap(null)
+        map_markers[index] = undefined
+      }
+
+      let lat = results[0].geometry.location.lat()
+      let lng = results[0].geometry.location.lng()
+      maps[index].panTo(new google.maps.LatLng(lat, lng))
+      marker = new google.maps.Marker({
+        position: { lat, lng },
+        map: maps[index]
+      })
+      map_markers[index] = marker
+
+      //検索した時に緯度経度を入力する
+      formLat.value = results[0].geometry.location.lat();
+      formLng.value = results[0].geometry.location.lng();
+
+      // マーカーのドロップ（ドラッグ終了）時のイベント
+      google.maps.event.addListener(marker, 'dragend', function(ev){
+          // イベントの引数evの、プロパティ.latLngが緯度経度
+          formLat.value = ev.latLng.lat();
+          formLng.value = ev.latLng.lng();
+      });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });
+}
+
+function initMap(){
+  Array.from(document.querySelectorAll('.nested-map')).forEach(f => {
+    let index = f.parentElement.dataset.index
+    maps[index] = new google.maps.Map(f, {
+      center: {lat: 35.6809591, lng: 139.7673068},
+      zoom: 12,
+    })
+  })
+}
+
+
+var maps = []
+var map_markers = []
+
+Array.from(document.querySelectorAll('.nested-input-latlon-button')).forEach(e => {
+  e.addEventListener('click', ev => codeAddress(ev))
+})
+
+$('form').on('cocoon:after-insert', (ev, elm) => {
+  let target = elm[0]
+  // cocoonが付与する謎の添字を持ってくる
+  let index = target.querySelector('input.route_place').name.match(
+    /drive_route\[routes_attributes\]\[(\d+)\]/
+  )[1]
+  target.dataset.index = index
+  target.querySelector('.nested-input-latlon-button').addEventListener('click', ev => codeAddress(ev))
+  maps[index] = new google.maps.Map(target.querySelector('.nested-map'), {
+    center: {lat: 35.6809591, lng: 139.7673068},
+    zoom: 12,
+  })
+})
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
 </div>
