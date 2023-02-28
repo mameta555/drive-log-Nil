@@ -1,6 +1,6 @@
 class Public::DriveRoutesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :search, :index]
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
     @drive_route = DriveRoute.new
